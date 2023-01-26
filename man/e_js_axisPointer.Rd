@@ -6,6 +6,9 @@
 \usage{
 e_js_axisPointer(sf = 0)
 }
+\arguments{
+\item{sf}{\code{int} significant figures of output \strong{Default: 2}}
+}
 \value{
 \code{shiny.tag.list}
 }
