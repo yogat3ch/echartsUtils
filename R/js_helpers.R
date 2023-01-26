@@ -4,7 +4,7 @@
 #' @export
 #'
 
-use_echartsUtils_deps <- function() {
+use_js_deps <- function() {
   js_src <- system.file("src", "js", package = "echartsUtils")
   deps <-
     tibble::tibble(
@@ -67,7 +67,7 @@ e_js_num2str <- function(js_parameters = c("value", "index"), n = "value", sf = 
   js_p <- glue::glue_collapse(js_parameters, sep = ", ")
 
   return(UU::glue_js("(*{js_p}*) => {
-      vars args = *{args}*;
+      var args = *{args}*;
       args.n = *{n}*;
       return num2str(args);
     }"))
