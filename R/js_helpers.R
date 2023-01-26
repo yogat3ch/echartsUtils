@@ -27,34 +27,26 @@ js_num2str <-
     UU::read_js(filename)
   }
 
-#' A callback function with associated dependencies for formatting Echarts axisPointers
-#'
-#' @return \code{shiny.tag.list}
-#' @export
-#'
-
-e_js_axisPointer <- function(sf = 0) {
-  UU::glue_js("
-            (params) => {
-              return axisPointer(params, sf = *{sf}*);
-            }
-            ")
-}
 
 
 #' An JS callback formatting function
 #' @param js_parameters \code{chr} the parameters to pass to the Javascript Callback function
 #' @param n \code{chr} The javascript value to pass as `n`, the number to be transformed by `num2str`
-#' @param sf \code{int} significant figures of output
-#' @param add_suffix \code{lgl}  whether to add a letter suffix
-#' @param suffix_lb \code{chr} The lower bound of the divisor (IE "M" do not go lower than millions)
-#' @param format \code{lgl} whether to reduce the magnitude when formatting
-#' @param magnitude \code{chr} If the magnitude is known apriori this can be used to override the factoring
-#'
-#' @return The JS string with appropriate arguments
+#' @param sf \code{int} significant figures of output **Default: 2**
+#' @param add_suffix \code{lgl}  whether to add a letter suffix **Default: FALSE**
+#' @param suffix_lb \code{chr} The lower bound of the divisor (IE "M" do not go lower than millions) **Default: ''** for no lower bound
+#' @param format \code{lgl} whether to reduce the magnitude when formatting **Default: TRUE**
+#' @param magnitude \code{chr} If the magnitude is known apriori this can be used to override the factoring **Default: NULL**
+#' @param add_commas \code{lgl} Format the numeric string output with commas every thousands place. **Default: FALSE**
+#' @details The Javascript function is provided below:
+#' \preformatted{
+#' `r glue::glue_collapse(readLines(system.file("src","js","num2str.js", package = "echartsUtils")), sep = "\n")`
+#' }
+
+#' @return The JS callback function as a string with appropriate arguments
 #' @export
 
-e_js_num2str <- function(js_parameters = c("value", "index"), n = "value", sf = NULL, add_suffix = NULL, suffix_lb = NULL, format = NULL, magnitude = NULL) {
+js_num2str <- function(js_parameters = c("value", "index"), n = "value", sf = NULL, add_suffix = NULL, suffix_lb = NULL, format = NULL, magnitude = NULL, add_commas = NULL) {
   args <- purrr::compact(list(
     sf = sf,
     add_suffix = add_suffix,
@@ -71,4 +63,18 @@ e_js_num2str <- function(js_parameters = c("value", "index"), n = "value", sf = 
       args.n = *{n}*;
       return num2str(args);
     }"))
+}
+
+#' A callback function with associated dependencies for formatting Echarts axisPointers
+#' @inheritParams js_num2str
+#' @return \code{shiny.tag.list}
+#' @export
+#'
+
+e_js_axisPointer <- function(sf = 0) {
+  UU::glue_js("
+            (params) => {
+              return axisPointer(params, sf = *{sf}*);
+            }
+            ")
 }
