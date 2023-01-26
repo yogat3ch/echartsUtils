@@ -5,10 +5,11 @@
 * @param {String} suffix_lb The lower bound of the divisor (IE "M" do not go lower than millions)
 * @param {Boolean} format whether to reduce the magnitude when formatting
 * @param {String} magnitude If the magnitude is known apriori this can be used to override the factoring
+* @param {Boolean} add_commas Format the numeric string output with commas every thousands place.
 * @returns {String} formatted axis label
 */
 
-function num2str ({n, sf = 2, add_suffix = false, suffix_lb = "", format = true, magnitude = null} = {}) {
+function num2str ({n, sf = 2, add_suffix = false, suffix_lb = "", format = true, magnitude = null, add_commas = false} = {}) {
   
   var suf_is_string = typeof add_suffix == 'string';
   var o = undefined;
@@ -76,5 +77,9 @@ function num2str ({n, sf = 2, add_suffix = false, suffix_lb = "", format = true,
       o = o.toLocaleString();
     }
   }
+  if (add_commas) {
+    o = addCommas(o);
+  }
+  
 return o;
 }
