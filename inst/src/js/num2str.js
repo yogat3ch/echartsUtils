@@ -10,8 +10,9 @@
 */
 
 function num2str ({n, sf = 2, add_suffix = false, suffix_lb = "", format = true, magnitude = null, add_commas = false} = {}) {
-  
+
   var suf_is_string = typeof add_suffix == 'string';
+  var do_magnitude = magnitude !== false
   var o = undefined;
   if (!is_null(n)) {
     if (format) {
@@ -33,7 +34,7 @@ function num2str ({n, sf = 2, add_suffix = false, suffix_lb = "", format = true,
           o = out[i]
           // index of the lowest suffix requested
           var lb = suf.indexOf(suffix_lb);
-        } else {
+        } else if (do_magnitude) {
           out = out.map(Math.abs);
           // Which multiple of one thousand as the divisor results in a number above 1
           var o = Math.min(...out.filter((a) => {return a>=1;}));
@@ -45,9 +46,9 @@ function num2str ({n, sf = 2, add_suffix = false, suffix_lb = "", format = true,
           o = isFinite(o) ? o : 0.0;
         }
       }
-     
-      
-      if (!suf_is_string && i > lb) {
+
+
+      if (!suf_is_string && i > lb && do_magnitude) {
         // Convert to decimal with string suffix abbreviation format
         o = (o * Math.sign(n))
         .toFixed(sf);
@@ -57,19 +58,19 @@ function num2str ({n, sf = 2, add_suffix = false, suffix_lb = "", format = true,
           .replace(/\.$/gm, "");
         }
         if (add_suffix) {
-          add_suffix = suf[i]; 
-        } 
+          add_suffix = suf[i];
+        }
       } else {
         // otherwise just format for humans
         o = sigFig(n, sf = sf);
       }
-    } 
+    }
   } else {
     var o = 'NA';
   }
-  
-  
-  
+
+
+
   if (typeof add_suffix == 'string') {
      o = o.toLocaleString() + add_suffix;
   } else {
@@ -80,6 +81,6 @@ function num2str ({n, sf = 2, add_suffix = false, suffix_lb = "", format = true,
   if (add_commas) {
     o = addCommas(o);
   }
-  
+
 return o;
 }

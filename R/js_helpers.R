@@ -51,7 +51,8 @@ js_num2str <- function(js_parameters = c("value", "index"), n = "value", sf = NU
     add_suffix = add_suffix,
     suffix_lb = suffix_lb,
     format = format,
-    magnitude = magnitude)) |>
+    magnitude = magnitude,
+    add_commas = add_commas)) |>
     jsonlite::toJSON(auto_unbox = TRUE) |>
     stringr::str_remove_all("\"")
 
