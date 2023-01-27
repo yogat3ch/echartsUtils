@@ -22,7 +22,7 @@ use_js_deps <- function() {
     })
   )
 }
-js_num2str <-
+.js_num2str <-
   function(filename = system.file("src", "js", "num2str.js", package = "echartsUtils")) {
     UU::read_js(filename)
   }
@@ -38,11 +38,10 @@ js_num2str <-
 #' @param format \code{lgl} whether to reduce the magnitude when formatting **Default: TRUE**
 #' @param magnitude \code{chr} If the magnitude is known apriori this can be used to override the factoring **Default: NULL**
 #' @param add_commas \code{lgl} Format the numeric string output with commas every thousands place. **Default: FALSE**
-#' @details The Javascript function is provided below:
-#' \preformatted{
-#' `r glue::glue_collapse(readLines(system.file("src","js","num2str.js", package = "echartsUtils")), sep = "\n")`
-#' }
-
+#' @details  The Javascript function is provided below for reference:
+#' ```{r echo=FALSE}
+#' glue::glue_collapse(readLines(system.file("src","js","num2str.js", package = "echartsUtils")), sep = '\n')
+#' ```
 #' @return The JS callback function as a string with appropriate arguments
 #' @export
 
