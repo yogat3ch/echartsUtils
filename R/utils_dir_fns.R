@@ -10,105 +10,144 @@ dirs <-
 list(css = function (..., ext = "", mkpath = FALSE, mustWork = FALSE) 
 {
     .path <- fs::path("inst/app/www/css", ..., ext = ext)
-    if (!mkpath) {
+    out <- if (!mkpath) {
         .path <- stringr::str_remove(.path, "^inst\\/?")
-        fs::path_package(package = "virgaEcharts", .path)
+        if (!FALSE && mustWork) 
+            fs::path_package(package = "echartsUtils", .path)
+        else .path
     }
     else .path
+    return(out)
 }, data = function (..., ext = "", mkpath = FALSE, mustWork = FALSE) 
 {
     .path <- fs::path("data", ..., ext = ext)
-    if (!mkpath) {
+    out <- if (!mkpath) {
         .path <- stringr::str_remove(.path, "^inst\\/?")
-        fs::path_package(package = "virgaEcharts", .path)
+        if (!FALSE && mustWork) 
+            fs::path_package(package = "echartsUtils", .path)
+        else .path
     }
     else .path
+    return(out)
 }, dev = function (..., ext = "", mkpath = FALSE, mustWork = FALSE) 
 {
     .path <- fs::path("dev", ..., ext = ext)
-    if (!mkpath) {
+    out <- if (!mkpath) {
         .path <- stringr::str_remove(.path, "^inst\\/?")
-        fs::path_package(package = "virgaEcharts", .path)
+        if (!FALSE && mustWork) 
+            fs::path_package(package = "echartsUtils", .path)
+        else .path
     }
     else .path
+    return(out)
 }, extdata = function (..., ext = "", mkpath = FALSE, mustWork = FALSE) 
 {
     .path <- fs::path("inst/extdata", ..., ext = ext)
-    if (!mkpath) {
+    out <- if (!mkpath) {
         .path <- stringr::str_remove(.path, "^inst\\/?")
-        fs::path_package(package = "virgaEcharts", .path)
+        if (!FALSE && mustWork) 
+            fs::path_package(package = "echartsUtils", .path)
+        else .path
     }
     else .path
+    return(out)
 }, img = function (..., ext = "", mkpath = FALSE, mustWork = FALSE) 
 {
     .path <- fs::path("inst/app/www/img", ..., ext = ext)
-    if (!mkpath) {
+    out <- if (!mkpath) {
         .path <- stringr::str_remove(.path, "^inst\\/?")
-        fs::path_package(package = "virgaEcharts", .path)
+        if (!FALSE && mustWork) 
+            fs::path_package(package = "echartsUtils", .path)
+        else .path
     }
     else .path
+    return(out)
 }, inst = function (..., ext = "", mkpath = FALSE, mustWork = FALSE) 
 {
     .path <- fs::path("inst", ..., ext = ext)
-    if (!mkpath) {
+    out <- if (!mkpath) {
         .path <- stringr::str_remove(.path, "^inst\\/?")
-        fs::path_package(package = "virgaEcharts", .path)
+        if (!FALSE && mustWork) 
+            fs::path_package(package = "echartsUtils", .path)
+        else .path
     }
     else .path
+    return(out)
 }, js = function (..., ext = "", mkpath = FALSE, mustWork = FALSE) 
 {
     .path <- fs::path("inst/app/www/js", ..., ext = ext)
-    if (!mkpath) {
+    out <- if (!mkpath) {
         .path <- stringr::str_remove(.path, "^inst\\/?")
-        fs::path_package(package = "virgaEcharts", .path)
+        if (!FALSE && mustWork) 
+            fs::path_package(package = "echartsUtils", .path)
+        else .path
     }
     else .path
+    return(out)
 }, R = function (..., ext = "", mkpath = FALSE, mustWork = FALSE) 
 {
     .path <- fs::path("R", ..., ext = ext)
-    if (!mkpath) {
+    out <- if (!mkpath) {
         .path <- stringr::str_remove(.path, "^inst\\/?")
-        fs::path_package(package = "virgaEcharts", .path)
+        if (!FALSE && mustWork) 
+            fs::path_package(package = "echartsUtils", .path)
+        else .path
     }
     else .path
+    return(out)
 }, renv = function (..., ext = "", mkpath = FALSE, mustWork = FALSE) 
 {
     .path <- fs::path("renv", ..., ext = ext)
-    if (!mkpath) {
+    out <- if (!mkpath) {
         .path <- stringr::str_remove(.path, "^inst\\/?")
-        fs::path_package(package = "virgaEcharts", .path)
+        if (!FALSE && mustWork) 
+            fs::path_package(package = "echartsUtils", .path)
+        else .path
     }
     else .path
+    return(out)
 }, tests = function (..., ext = "", mkpath = FALSE, mustWork = FALSE) 
 {
     .path <- fs::path("tests/testthat", ..., ext = ext)
-    if (!mkpath) {
+    out <- if (!mkpath) {
         .path <- stringr::str_remove(.path, "^inst\\/?")
-        fs::path_package(package = "virgaEcharts", .path)
+        if (!FALSE && mustWork) 
+            fs::path_package(package = "echartsUtils", .path)
+        else .path
     }
     else .path
+    return(out)
 }, top = function (..., ext = "", mkpath = FALSE, mustWork = FALSE) 
 {
     .path <- fs::path(".", ..., ext = ext)
-    if (!mkpath) {
+    out <- if (!mkpath) {
         .path <- stringr::str_remove(.path, "^inst\\/?")
-        fs::path_package(package = "virgaEcharts", .path)
+        if (!FALSE && mustWork) 
+            fs::path_package(package = "echartsUtils", .path)
+        else .path
     }
     else .path
+    return(out)
 }, vault = function (..., ext = "", mkpath = FALSE, mustWork = FALSE) 
 {
     .path <- fs::path("inst/vault", ..., ext = ext)
-    if (!mkpath) {
+    out <- if (!mkpath) {
         .path <- stringr::str_remove(.path, "^inst\\/?")
-        fs::path_package(package = "virgaEcharts", .path)
+        if (!FALSE && mustWork) 
+            fs::path_package(package = "echartsUtils", .path)
+        else .path
     }
     else .path
+    return(out)
 }, www = function (..., ext = "", mkpath = FALSE, mustWork = FALSE) 
 {
     .path <- fs::path("inst/app/www", ..., ext = ext)
-    if (!mkpath) {
+    out <- if (!mkpath) {
         .path <- stringr::str_remove(.path, "^inst\\/?")
-        fs::path_package(package = "virgaEcharts", .path)
+        if (!FALSE && mustWork) 
+            fs::path_package(package = "echartsUtils", .path)
+        else .path
     }
     else .path
+    return(out)
 })

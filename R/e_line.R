@@ -3,7 +3,8 @@
 #' a single serie
 #' @return appropriately formatted list to add as an entry to the series list
 #' in the base list
-#'
+#' @family line
+#' @family options
 #' @param data \code{num} series data
 #' @param name \code{chr} See [echarts setOption docs](https://echarts.apache.org/en/option.html#series-line.name)
 #' @param type \code{chr} See [echarts setOption docs](https://echarts.apache.org/en/option.html#series-line.type)
@@ -46,7 +47,7 @@ e_opts_make_stacked_area_series = function(data,
 }
 
 
-#' Apply default options for a
+#' A list of default options for an echart line
 #'
 #' @param .data \code{tbl} of Reservoir Data
 #' @param grid See [echarts setOption docs](https://echarts.apache.org/en/option.html#grid)
@@ -56,7 +57,8 @@ e_opts_make_stacked_area_series = function(data,
 #' @param xAxis See [echarts setOption docs](https://echarts.apache.org/en/option.html#xAxis)
 #' @param yAxis See [echarts setOption docs](https://echarts.apache.org/en/option.html#yAxis)
 #' @param ... \code{args} Additional parameters
-#'
+#' @family line
+#' @family options
 #' @return \code{list}
 #' @export
 
@@ -65,8 +67,7 @@ e_opts_line_default <- function(.data,
                                 color = NULL,
                                 tooltip = list(trigger = 'axis',
                                                axisPointer = list(
-                                                 type = 'cross',
-                                                 label = list(backgroundColor = '#6a7985')
+                                                 type = 'cross'
                                                )),
                                 legend = list(
                                   textStyle = list(fontSize = 10),
@@ -79,15 +80,7 @@ e_opts_line_default <- function(.data,
                                 xAxis = list(type = 'category'),
                                 yAxis = list(type = 'value'),
                                 ...) {
-  data_nms <- names(.data)
-  # Convenient defaults for RiverViz
-  if ("reservoir_name" %in% data_nms) {
-    color <- unname(UU::color_cycle(UU::color_separate(purrr::flatten(color_theme[[dark_mode_choice()]])), n = UU::len_unique(.data$reservoir_name), amount = .2))
-    legend$data = unique(.data$reservoir_name)
-  }
-  if ("year" %in% data_nms) {
-    data = unique(.data$year)
-  }
+
 
   list(
     grid = grid,

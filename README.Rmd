@@ -1,0 +1,43 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%",
+  warning = FALSE,
+  message = FALSE
+)
+```
+
+# echartsUtils
+```{r setup, echo = FALSE, results='hide'}
+devtools::load_all()
+```
+
+<!-- badges: start -->
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+<!-- badges: end -->
+
+The goal of echartsUtils is to consolidate helpful utility functions for modifying Echarts rendered via [echarty](https://github.com/helgasoft/echarty) & [echarts4r](https://github.com/JohnCoene/echarts4r).
+
+## Installation
+
+You can install the development version of echartsUtils from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("yogat3ch/echartsUtils")
+```
+
+## Functions
+
+```{r fns, echo = FALSE}
+bs4Dash::bs4Table(UU::fun_docs_table())
+```
+

@@ -11,6 +11,7 @@ RoxygenNote: 7.2.3
 Imports: 
     echarts4r,
     htmlwidgets,
+    lifecycle,
     pkgload,
     purrr,
     rlang,

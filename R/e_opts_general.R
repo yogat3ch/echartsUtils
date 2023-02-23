@@ -1,7 +1,7 @@
 
 
 #' Is the echart using baseOptions
-#'
+#' @family options
 #' @param e \code{echart}
 #'
 #' @return \code{lgl}
@@ -14,7 +14,7 @@ e_has_base_opts <- function(e) {
 #' Get the options from an echart
 #'
 #' @inheritParams e_has_base_opts
-#'
+#' @family options
 #' @return \code{list}
 #' @export
 
@@ -24,7 +24,7 @@ e_get_opts <- function(e) {
 
 
 #' Does the echart have a group
-#'
+#' @family options
 #' @inherit e_has_base_opts params return
 #' @export
 
@@ -34,7 +34,7 @@ e_has_group <- function(e) {
 
 
 #' Does the echart have a timeline
-#'
+#' @family options
 #' @inherit e_has_base_opts params return
 #' @export
 e_has_timeline <- function(e) {
@@ -46,7 +46,7 @@ e_has_timeline <- function(e) {
 #' @param e \code{echart}
 #' @param opts \code{list} of options to replace/modify
 #' @param replace \code{lgl} whether to replace or modify (the default)
-#'
+#' @family options
 #' @return \code{list}
 #' @export
 
@@ -63,7 +63,7 @@ e_opts_modify <- function(e, opts, replace = FALSE) {
 #' Update echarts options
 #'
 #' @inheritParams e_opts_modify
-#'
+#' @family options
 #' @return \code{echarts}
 #' @export
 
@@ -79,7 +79,7 @@ e_opts_update <- function(e, opts, replace = FALSE) {
 
 
 #' Use the default options applied to each echart.
-#'
+#' @family options
 #' @param dims \code{(list/logical/NULL)} See \link[echarts4r]{e_dims}
 #' @param datazoom \code{(list/logical/NULL)} See \link[echarts4r]{e_datazoom}
 #' @param toolbox \code{(list/logical/NULL)} See \link[echarts4r]{e_toolbox}
@@ -96,6 +96,9 @@ e_opts_update <- function(e, opts, replace = FALSE) {
 e_default_opts <- function(e,
                            dims = TRUE,
                            datazoom = FALSE,
+                           grid = list(
+                             containLabel = TRUE
+                           ),
                            toolbox = list(orient = "vertical",
                                           itemSize = 8,
                                           itemGap = 3),

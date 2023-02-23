@@ -2,7 +2,7 @@
 #' Get y-axis options
 #'
 #' @param e \code{htmlwidget/list} An echarts objects or an options list
-#'
+#' @family options
 #' @return \code{list} of options
 #' @export
 #'
@@ -29,12 +29,13 @@ e_opts_yAxis.list <- function(e) {
 #'
 #' @return \code{list} of options
 #' @export
-#'
+#' @family options
 #' @examples
 #' lapply(list(echarty::ec.init(mtcars), echarts4r::e_chart(mtcars)), e_opts_xAxis)
 e_opts_xAxis <- function(e) {
   UseMethod("e_opts_xAxis")
 }
+
 e_opts_unnest <- function(opts) {
   if (length(opts) == 1 && is.null(names(opts)))
     opts <- opts[[1]]
@@ -64,25 +65,10 @@ e_yAxis_opts_lists <- c(
   list(axisPointer = list(label = c("lineStyle", "shadowStyle", "handle")))
 )
 
-#' Is the X axis in years?
-#'
-#' @param e \code{echart}
-#'
-#' @return \code{lgl}
-#' @export
-#'
-
-e_year_on_x <- function(e) {
-  .data <- e_series_data(e)
-  out <- try(
-    all(dplyr::between(do.call(c, purrr::map(.data, "x")), 600, 2200))
-  )
-  return(out)
-}
-
 
 #' Get the series option from an echarts object
-#'
+#' @family options
+#' @family series
 #' @param e \code{echart}
 #' @inheritParams purrr::pluck
 #' @return \code{list}
@@ -101,7 +87,7 @@ e_series <- function(e, ...) {
 }
 
 #' Retrieve a specific object from each series item
-#'
+#' @family series
 #' @param series \code{list} Echarts series options
 #' @inheritParams purrr::pluck
 #'
@@ -114,7 +100,8 @@ e_series_object <- function(series, ...) {
 }
 
 #' Extract the series data
-#'
+#' @family options
+#' @family data
 #' @param e \code{echart}
 #' @param axis \code{chr} "x" or "y" to indicate data for which axis
 #' @param as_chr \code{lgl} conver the output to a human legible string
@@ -205,6 +192,8 @@ e_series_data <- function(e) {
 
 #' Extract data for a particular axis from an `axis_data`` tbl
 #' @seealso e_series_data
+#' @family options
+#' @family data
 #' @param axis_data \code{tbl} Axis data as returned by `e_series_data`
 #' @param axis \code{chr} x or y. z currently not supported.
 #' @param flat \code{lgl} Whether to flatten or leave as a tbl
@@ -226,7 +215,8 @@ e_series_axis_data <- function(axis_data, axis = "x", flat = TRUE) {
 #' Does the echart have xAxis options for each series (multiple unnamed lists with options)
 #'
 #' @param e \code{echart}
-#'
+#' @family options
+#' @family series
 #' @return \code{lgl}
 #' @export
 
@@ -237,7 +227,7 @@ e_opts_is_xAxis_series <- function(e) {
 #' Get the xAxis type
 #'
 #' @param e \code{echart}
-#'
+#' @family options
 #' @return \code{chr}
 #' @export
 #'
@@ -250,71 +240,10 @@ e_opts_xAxis_type <- function(e) {
     opts$type
 }
 
-
-#' e_x_axis_year_formatting
-#' @description generates a list that configures the min/max and correct axis formatting
-#' for echarts figs
-#' @param e_ctxt \code{(character)} The context in which the e_chart is being rendered
-#' @inheritDotParams echarts4r::e_x_axis
-#' @return A list of parameters for appropriate x-axis formatting for years on echarts figures
-#'
-#' @export
-
-e_x_axis_formatting = function(e,
-                               scale = TRUE,
-                               type = e_opts_xAxis_type(e) %||% 'value',
-                               min = "auto",
-                               max = "auto",
-                               name = purrr::when(e_year_on_x(e), isTRUE(.) ~ "Year", ~ NULL),
-                               nameLocation = "middle",
-                               nameTextStyle = list(padding = rep(0, 4), fontFamily = "rennerbook"),
-                               nameGap = 35,
-                               formatter = UU::as_js(
-                                 "function(value, index){
-          return typeof value == 'number' ? parseFloat(value) : value;
-       }"
-                               ),
-       rotate = 45,
-       fontFamily = "rennerbook",
-       ...) {
-  x <- e_series_axis_data(e_series_data(e), axis = "x")
-  if (identical(min, "auto") && is.numeric(x))
-    min <- UU::round_any(min(x, na.rm = TRUE), 10, floor)
-  if (identical(max, "auto") && is.numeric(x))
-    max <- UU::round_any(max(x, na.rm = TRUE), 10, ceiling)
-  # Modify rather than replace
-  out =
-    rlang::exec(
-      echarts4r::e_x_axis,
-      e,
-      !!!purrr::list_modify(
-        e_opts_xAxis(e),
-        !!!purrr::compact(list(
-          scale = scale,
-          type = type,
-          axisLabel = purrr::compact(list(
-            formatter = formatter,
-            rotate = rotate,
-            fontFamily = fontFamily
-          )),
-          min = min,
-          max = max,
-          name = name,
-          nameLocation = nameLocation,
-          nameTextStyle = nameTextStyle,
-          nameGap = nameGap,
-          ...
-        ))
-      )
-    )
-
-  return(out)
-}
-
 #' Calculate a best guess `nameGap` value for spacing the ECharts axis titles beyond the axis labels
 #' @seealso e_y_axis_formatting
 #' @param x \code{num} All values on the y axis. See `e_series_axis_data`
-#'
+#' @family options
 #' @return \code{num}
 #' @export
 
@@ -330,13 +259,132 @@ e_yAxis_width <- function(x, outtype = c("rounded", "abbreviated"), sf = 0) {
 
 
 
-js_num2str <- function(filename = dirs$js("num2str.js")) {
-  UU::read_js(filename)
+
+#' Default formatter for axisPointer
+#'
+#' @param ... \code{params} arbitrary Echarts axisPointer Options
+#' @param show \code{lgl} whether to show axisPointers
+#' @inheritParams js_num2str
+#'
+#' @return \code{list} with options and formatter function
+#' @export
+#'
+
+e_opts_axisPointer <- function(...,
+                               show = TRUE,
+                               sf = 0,
+                               add_commas = TRUE,
+                               add_suffix = FALSE,
+                               format = TRUE,
+                               suffix_lb = NULL,
+                               magnitude = FALSE) {
+
+
+
+  d <- rlang::dots_list(...)
+  if (is.null(d$label)) {
+    d$label = list(
+      formatter = do.call(js_num2str, purrr::compact(
+        list(
+          js_parameters = "params",
+          n = "params.value",
+          sf = sf,
+          add_commas = add_commas,
+          add_suffix = add_suffix,
+          format = format,
+          suffix_lb = suffix_lb,
+          magnitude = magnitude
+        )
+      ))
+    )
+  }
+  rlang::list2(
+    !!!d,
+    show = show
+  )
+}
+
+
+#' e_x_axis_year_formatting
+#' @description generates a list that configures the min/max and correct axis formatting
+#' for echarts figs
+#' @param e_ctxt \code{(character)} The context in which the e_chart is being rendered
+#' @inheritDotParams echarts4r::e_x_axis
+#' @return A list of parameters for appropriate x-axis formatting for years on echarts figures
+#' @family options
+#' @export
+
+e_x_axis_formatting = function(e,
+                               scale = TRUE,
+                               type = e_opts_xAxis_type(e) %||% 'value',
+                               min = "auto",
+                               max = "auto",
+                               name = if (e_year_on_x(e)) {
+                                 "Year"
+                               },
+                               nameLocation = "middle",
+                               nameTextStyle = list(padding = rep(0, 4), fontFamily = "rennerbook"),
+                               nameGap = 35,
+                               formatter = htmlwidgets::JS(
+                                 "function(value, index){
+          return typeof value == 'number' ? parseFloat(value) : value;
+       }"
+                               ),
+       rotate = 45,
+       fontFamily = "rennerbook",
+       ...) {
+  x <- e_series_axis_data(e_series_data(e), axis = "x")
+  force(name)
+
+  if (identical(min, "auto") && is.numeric(x))
+    min <- UU::round_any(min(x, na.rm = TRUE), 10, floor)
+  if (identical(max, "auto") && is.numeric(x))
+    max <- UU::round_any(max(x, na.rm = TRUE), 10, ceiling)
+  .dots <- rlang::dots_list(...)
+  if (identical(name,"Year")) {
+    .dots$axisPointer = list(
+      label = list(
+        formatter = UU::as_js("(params) => {return params.value.toString()}")
+      )
+    )
+  }
+  # Modify rather than replace
+  out =
+    rlang::exec(
+      echarts4r::e_x_axis,
+      e,
+      !!!purrr::list_modify(
+        e_opts_xAxis(e) %||% list(),
+        !!!purrr::compact(purrr::list_modify(
+          list(
+            scale = scale,
+            type = type,
+            axisLabel = purrr::compact(
+              list(
+                formatter = formatter,
+                rotate = rotate,
+                fontFamily = fontFamily
+              )
+            ),
+            min = min,
+            max = max,
+            name = name,
+            nameLocation = nameLocation,
+            nameTextStyle = nameTextStyle,
+            nameGap = nameGap
+          ),
+          !!!.dots
+        ))
+      )
+    )
+
+  return(out)
 }
 
 
 #' e_y_axis_year_formatting
 #' @description generates a list that configures the correct y axis formatting for echarts figs
+#' @family options
 #' @seealso echarts4r::e_y_axis
 #' @inheritParams e_x_axis_formatting
 #' @inheritDotParams echarts4r::e_y_axis
@@ -345,44 +393,40 @@ js_num2str <- function(filename = dirs$js("num2str.js")) {
 #' @param nameLocation \code{chr} Where to position the axis label. **Default 'middle'**
 #' @param nameTextStyle \code{list} With named parameters. See \href{https://echarts.apache.org/en/option.html#yAxis.nameTextStyle}{Echarts yAxis.nameTextStyle}
 #' @param nameGap \code{num/chr} **Default: 'auto'** uses custom heuristics to determine a best guess. See \link{axis_width}. Otherwise a numeric pixel value
+#' @param mo \code{int} of the magnitude of the units. 9 = Billions, 6 = Millions etc
 #' @return A list of parameters for appropriate y-axis formatting for years on echarts figures
-#'
 #' @export
 
 
 e_y_axis_formatting <- function(e,
                                 scale = TRUE,
                                 type = 'value',
-                                formatter = UU::as_js(paste0("function(value, index){\n", js_num2str(),"\nreturn num2str({n: value});  }"
-                                )),
+                                formatter = echartsUtils::js_num2str(),
                                 fontFamily = "rennerbook",
+                                name = NULL,
                                 nameLocation = "middle",
                                 nameTextStyle = list(padding = c(0,0,0,0), fontFamily = "rennerbook"),
                                 nameGap = 'auto',
-                                name = NULL,
-                                e_ctxt,
+                                mo = NULL,
+                                axisPointer = e_opts_axisPointer(),
                                 ...) {
 
-  if (!missing(e_ctxt)) {
-    # For use in RiverViz app
-    e_ctxt = stringr::str_extract(id_from_ns(), UU::regex_or(c("reservoirs", "energy", "storage"))) %|% 'reservoirs'
-    name = purrr::when(e_ctxt, . == "reservoirs" ~ "Elevation (F)", . == "energy" ~ "Output (MW)", . == "storage" ~ "Volume (AF)")
-  }
 
   # Handle axis title units ----
   # Wed Oct  5 14:32:28 2022
   # e_series_Data needs debug for timeline line graphs with median
-
   x <- e_series_data(e)
-  unit <- UU::unit_string(name)
-  y <- e_series_axis_data(x, "y")
-  .max <- max(abs(y), na.rm = TRUE)
-  mo <- UU::magnitude_order(.max)
+  if (!rlang::is_empty(x)) {
+    unit <- UU::unit_string(name)
+    y <- e_series_axis_data(x, "y")
+    .max <- max(abs(y), na.rm = TRUE)
+    mo <- mo %||% UU::magnitude_order(.max)
 
-  if (mo >= 3 && UU::is_legit(unit) && UU::is_legit(formatter)) {
-    UU::unit_string(name) <- UU::unit_modify_vec(.max, unit = unit, outtype = "end")
-    .max <- round(.max / 10 ^ mo, 2)
+    if (mo >= 3 && UU::is_legit(unit) && UU::is_legit(formatter)) {
+      UU::unit_string(name) <- UU::unit_modify_vec(.max, unit = unit, outtype = "end", magnitude = mo)
+    }
   }
+
 
 
   if (nameGap == 'auto') {
@@ -400,13 +444,14 @@ e_y_axis_formatting <- function(e,
   }
 
   # Modify rather than replace
+  .dots <- rlang::dots_list(...)
   out =
     rlang::exec(
       echarts4r::e_y_axis,
       e,
       !!!purrr::list_modify(
-        e_opts_yAxis(e),
-        !!!purrr::compact(rlang::list2(
+        e_opts_yAxis(e) %||% list(),
+        !!!purrr::compact(purrr::list_modify(rlang::list2(
           scale = scale,
           type = type,
           axisLabel = purrr::compact(list(
@@ -417,8 +462,9 @@ e_y_axis_formatting <- function(e,
           nameLocation = nameLocation,
           nameTextStyle = nameTextStyle,
           nameGap = nameGap,
-          ...
-        ))
+          axisPointer = axisPointer),
+          !!!.dots)
+        )
       )
     )
   # Handle echarts `grid` options ----
@@ -429,12 +475,13 @@ e_y_axis_formatting <- function(e,
   # Add grid spacing so labels & titles show properly
   grid <- opts$grid %||% list()
 
-  grid <- if (purrr::vec_depth(grid) > 2)
+  grid <- if (purrr::vec_depth(grid) > 2) {
     purrr::map(
       grid,
       ~ purrr::list_modify(.x, containLabel = TRUE))
-  else
+  } else {
     purrr::list_modify(grid, containLabel = TRUE)
+  }
 
   opts$grid <- grid
 
