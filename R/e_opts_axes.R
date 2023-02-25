@@ -189,16 +189,23 @@ e_series_data <- function(e) {
 
 
     } else {
+      parallel <- unique(names(.encode)) == "parallel"
       out <- try(purrr::map2(.data, .encode, ~{
         d <- .x
         .enc <- .y
         purrr::map_dfc(.y, ~{
           i <- .x
-          do.call(c, purrr::map(d, ~.x$value[[i]] %||% .x[[i]]))
+          do.call(c, if (parallel) {
+            list(d[[i]])
+          } else {
+            purrr::map(d, \(.x) {
+              .x$value[[i]] %||% .x[[i]]
+            })
+          })
         })
       }))
       if (!e$x$tl)
-        names(out) <- purrr::map_chr(.desc, ~glue::glue("{.x$name}_{.x$type}"))
+        names(out) <- purrr::map_chr(.desc, ~glue::glue("{.x$name %||% ''}_{.x$type}"))
       out
     }
   })
