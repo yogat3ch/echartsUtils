@@ -227,10 +227,20 @@ e_series_data <- function(e) {
 #'
 
 e_series_axis_data <- function(axis_data, axis = "x", flat = TRUE) {
-  out <- if (is.data.frame(axis_data))
-    dplyr::select(axis_data, dplyr::starts_with(axis))
-  else
-    purrr::map(axis_data, ~dplyr::select(.x, dplyr::starts_with(axis)))
+  to_numeric <-  \(.x) {
+    out <- as.numeric(.x)
+    if (UU::most(!is.na(out)))
+      out
+    else
+      .x
+  }
+  out <- if (is.data.frame(axis_data)) {
+    dplyr::select(axis_data, dplyr::starts_with(axis)) |>
+      dplyr::mutate(dplyr::across(.fns = to_numeric))
+  } else {
+    out <- purrr::map(axis_data, ~dplyr::select(.x, dplyr::starts_with(axis))) |>
+      purrr::map(to_numeric)
+  }
   if (flat)
     out <- unlist(out)
   return(out)
