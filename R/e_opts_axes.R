@@ -133,9 +133,10 @@ e_series_data <- function(e) {
   #        y = 2)
   .data <- vector("list")
   .desc <- vector("list")
+  data_unnested <- "data" %in% names(x)
   for (idx in seq_along(x)) {
-    .data[[idx]] <- x[[idx]]$data
-    .desc[[idx]] <- purrr::keep(x[[idx]], names(x[[idx]]) %nin% "data")
+    .data[[idx]] <- if (data_unnested) x$data[[idx]] else x[[idx]]$data
+    .desc[[idx]] <- if (data_unnested) purrr::keep(x, names(x) %nin% "data") else purrr::keep(x[[idx]], names(x[[idx]]) %nin% "data")
   }
   # Axis mappings in the series data
   .encode <- purrr::map(.desc, ~{
