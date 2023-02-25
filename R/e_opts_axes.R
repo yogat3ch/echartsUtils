@@ -99,6 +99,22 @@ e_series_object <- function(series, ...) {
   x <- purrr::map(series, \(.x) {purrr::pluck(.x, ...)})
 }
 
+#' Is the X axis in years?
+#'
+#' @param e \code{echart}
+#' @family data
+#' @return \code{lgl}
+#' @export
+#'
+
+e_year_on_x <- function(e) {
+  out <- try(
+    all(dplyr::between(as.numeric(e_series_axis_data(e_series_data(e))), 600, 2200))
+  )
+  return(out)
+}
+
+
 #' Extract the series data
 #' @family options
 #' @family data
