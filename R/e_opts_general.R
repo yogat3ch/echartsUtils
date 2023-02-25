@@ -109,7 +109,7 @@ e_default_opts <- function(e,
                            text_style = list(fontFamily = 'rennerbook'),
                            saveAsImage_filename = list(),
                            ...) {
-  e_funs <- lsf.str(pattern = "^e_", rlang::ns_env(pkgload::pkg_name()))
+  e_funs <- lsf.str(pattern = "^e_", rlang::ns_env("echartsUtils"))
   .dots <- rlang::dots_list(..., .named = TRUE)
   named_args <- rlang::fn_fmls_names() |>
     {\(x) {subset(x, !x %in% c("e", "..."))}}() |>
@@ -124,7 +124,7 @@ e_default_opts <- function(e,
       .args <- purrr::when(..2,
                            is.list(.) ~ ..2,
                            . ~ list())
-      .call <- rlang::call2(..3, ..1, !!!.args, .ns = ifelse(..3 %in% e_funs, pkgload::pkg_name(), "echarts4r"))
+      .call <- rlang::call2(..3, ..1, !!!.args, .ns = ifelse(..3 %in% e_funs, "echartsUtils", "echarts4r"))
       out <- rlang::eval_bare(.call)
     } else
       out <- ..1
