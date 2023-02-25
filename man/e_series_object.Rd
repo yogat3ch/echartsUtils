@@ -26,3 +26,9 @@ your accessors are stored in a list, you can splice that in with
 \description{
 Retrieve a specific object from each series item
 }
+\seealso{
+Other series: 
+\code{\link{e_opts_is_xAxis_series}()},
+\code{\link{e_series}()}
+}
+\concept{series}

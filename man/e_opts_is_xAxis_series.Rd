@@ -21,3 +21,30 @@ Does the echart have xAxis options for each series (multiple unnamed lists with 
 
 Does the echart have xAxis options for each series (multiple unnamed lists with options)
 }
+\seealso{
+Other options: 
+\code{\link{e_default_opts}()},
+\code{\link{e_get_opts}()},
+\code{\link{e_has_base_opts}()},
+\code{\link{e_has_group}()},
+\code{\link{e_has_timeline}()},
+\code{\link{e_opts_line_default}()},
+\code{\link{e_opts_make_stacked_area_series}()},
+\code{\link{e_opts_modify}()},
+\code{\link{e_opts_update}()},
+\code{\link{e_opts_xAxis_type}()},
+\code{\link{e_opts_xAxis}()},
+\code{\link{e_opts_yAxis}()},
+\code{\link{e_series_axis_data}()},
+\code{\link{e_series_data}()},
+\code{\link{e_series}()},
+\code{\link{e_x_axis_formatting}()},
+\code{\link{e_yAxis_width}()},
+\code{\link{e_y_axis_formatting}()}
+
+Other series: 
+\code{\link{e_series_object}()},
+\code{\link{e_series}()}
+}
+\concept{options}
+\concept{series}

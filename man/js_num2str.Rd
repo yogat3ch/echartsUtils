@@ -39,9 +39,12 @@ The JS callback function as a string with appropriate arguments
 An JS callback formatting function
 }
 \details{
-The Javascript function is provided below:
+The Javascript function is provided below for reference:
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{#> /**
+\if{html}{\out{<div class="sourceCode">}}\preformatted{#> Warning in readLines(system.file("src", "js", "num2str.js", package =
+#> "echartsUtils")): incomplete final line found on '/Users/stephenholsenbeck/
+#> Documents/R/Contributor_Repos/VirgaLabs/echartsUtils/inst/src/js/num2str.js'
+#> /**
 #> * @param \{Number\} n number to make into string
 #> * @param \{Number\} sf significant figures of output
 #> * @param \{Boolean\} add_suffix whether to add a letter suffix
@@ -55,6 +58,7 @@ The Javascript function is provided below:
 #> function num2str (\{n, sf = 2, add_suffix = false, suffix_lb = "", format = true, magnitude = null, add_commas = false\} = \{\}) \{
 #>   
 #>   var suf_is_string = typeof add_suffix == 'string';
+#>   var do_magnitude = magnitude !== false
 #>   var o = undefined;
 #>   if (!is_null(n)) \{
 #>     if (format) \{
@@ -76,7 +80,7 @@ The Javascript function is provided below:
 #>           o = out[i]
 #>           // index of the lowest suffix requested
 #>           var lb = suf.indexOf(suffix_lb);
-#>         \} else \{
+#>         \} else if (do_magnitude) \{
 #>           out = out.map(Math.abs);
 #>           // Which multiple of one thousand as the divisor results in a number above 1
 #>           var o = Math.min(...out.filter((a) => \{return a>=1;\}));
@@ -90,7 +94,7 @@ The Javascript function is provided below:
 #>       \}
 #>      
 #>       
-#>       if (!suf_is_string && i > lb) \{
+#>       if (!suf_is_string && i > lb && do_magnitude) \{
 #>         // Convert to decimal with string suffix abbreviation format
 #>         o = (o * Math.sign(n))
 #>         .toFixed(sf);
@@ -126,5 +130,6 @@ The Javascript function is provided below:
 #>   
 #> return o;
 #> \}
+#> 
 }\if{html}{\out{</div>}}
 }

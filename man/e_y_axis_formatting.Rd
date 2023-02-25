@@ -8,19 +8,21 @@ e_y_axis_formatting(
   e,
   scale = TRUE,
   type = "value",
-  formatter = UU::as_js(paste0("function(value, index){\\n", js_num2str(),
-    "\\nreturn num2str({n: value});  }")),
+  formatter = echartsUtils::js_num2str(),
   fontFamily = "rennerbook",
+  name = NULL,
   nameLocation = "middle",
   nameTextStyle = list(padding = c(0, 0, 0, 0), fontFamily = "rennerbook"),
   nameGap = "auto",
-  name = NULL,
-  e_ctxt,
+  mo = NULL,
+  axisPointer = e_opts_axisPointer(),
   ...
 )
 }
 \arguments{
 \item{fontFamily}{\code{chr} CSS font-family}
+
+\item{name}{\code{chr} Axis label}
 
 \item{nameLocation}{\code{chr} Where to position the axis label. \strong{Default 'middle'}}
 
@@ -28,9 +30,7 @@ e_y_axis_formatting(
 
 \item{nameGap}{\code{num/chr} \strong{Default: 'auto'} uses custom heuristics to determine a best guess. See \link{axis_width}. Otherwise a numeric pixel value}
 
-\item{name}{\code{chr} Axis label}
-
-\item{e_ctxt}{\code{(character)} The context in which the e_chart is being rendered}
+\item{mo}{\code{int} of the magnitude of the units. 9 = Billions, 6 = Millions etc}
 
 \item{...}{
   Arguments passed on to \code{\link[echarts4r:axis]{echarts4r::e_y_axis}}
@@ -53,4 +53,25 @@ generates a list that configures the correct y axis formatting for echarts figs
 }
 \seealso{
 echarts4r::e_y_axis
+
+Other options: 
+\code{\link{e_default_opts}()},
+\code{\link{e_get_opts}()},
+\code{\link{e_has_base_opts}()},
+\code{\link{e_has_group}()},
+\code{\link{e_has_timeline}()},
+\code{\link{e_opts_is_xAxis_series}()},
+\code{\link{e_opts_line_default}()},
+\code{\link{e_opts_make_stacked_area_series}()},
+\code{\link{e_opts_modify}()},
+\code{\link{e_opts_update}()},
+\code{\link{e_opts_xAxis_type}()},
+\code{\link{e_opts_xAxis}()},
+\code{\link{e_opts_yAxis}()},
+\code{\link{e_series_axis_data}()},
+\code{\link{e_series_data}()},
+\code{\link{e_series}()},
+\code{\link{e_x_axis_formatting}()},
+\code{\link{e_yAxis_width}()}
 }
+\concept{options}

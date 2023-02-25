@@ -10,12 +10,14 @@ e_x_axis_formatting(
   type = e_opts_xAxis_type(e) \%||\% "value",
   min = "auto",
   max = "auto",
-  name = purrr::when(e_year_on_x(e), isTRUE(.) ~ "Year", ~NULL),
+  name = if (e_year_on_x(e)) {
+     "Year"
+ },
   nameLocation = "middle",
   nameTextStyle = list(padding = rep(0, 4), fontFamily = "rennerbook"),
   nameGap = 35,
   formatter =
-    UU::as_js("function(value, index){\\n          return typeof value == 'number' ? parseFloat(value) : value;\\n       }"),
+    htmlwidgets::JS("function(value, index){\\n          return typeof value == 'number' ? parseFloat(value) : value;\\n       }"),
   rotate = 45,
   fontFamily = "rennerbook",
   ...
@@ -44,3 +46,25 @@ A list of parameters for appropriate x-axis formatting for years on echarts figu
 generates a list that configures the min/max and correct axis formatting
 for echarts figs
 }
+\seealso{
+Other options: 
+\code{\link{e_default_opts}()},
+\code{\link{e_get_opts}()},
+\code{\link{e_has_base_opts}()},
+\code{\link{e_has_group}()},
+\code{\link{e_has_timeline}()},
+\code{\link{e_opts_is_xAxis_series}()},
+\code{\link{e_opts_line_default}()},
+\code{\link{e_opts_make_stacked_area_series}()},
+\code{\link{e_opts_modify}()},
+\code{\link{e_opts_update}()},
+\code{\link{e_opts_xAxis_type}()},
+\code{\link{e_opts_xAxis}()},
+\code{\link{e_opts_yAxis}()},
+\code{\link{e_series_axis_data}()},
+\code{\link{e_series_data}()},
+\code{\link{e_series}()},
+\code{\link{e_yAxis_width}()},
+\code{\link{e_y_axis_formatting}()}
+}
+\concept{options}
