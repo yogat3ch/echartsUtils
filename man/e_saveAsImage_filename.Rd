@@ -4,7 +4,7 @@
 \alias{e_saveAsImage_filename}
 \title{saveAsImage_filename}
 \usage{
-e_saveAsImage_filename(e, name = "chart_download.png", watermark = TRUE)
+e_saveAsImage_filename(e, watermark = FALSE, name = "chart_download.png")
 }
 \value{
 A modified echarts obj
