@@ -16,7 +16,11 @@ function sigFig(n, sf = 0) {
     var log10 = Math.log10(Math.abs(n)) || 1;
     if ((n > 1 || n < -1) && Boolean(n - Math.floor(n))) {
       // Numbers with decimal places
-      var out = n.toPrecision(log10 + 1 + sf);
+      var precision = log10 + sf
+      if (sigFig_length(n) > sf) {
+        precision += 1
+      }
+      var out = n.toPrecision(precision);
     } else if ((n < 1 && n > 0) || (n < 0 && n > -1)) {
       // Decimals
       var out = n.toPrecision(1);
