@@ -120,6 +120,93 @@ e_default_opts <- function(e,
                            text_style = list(fontFamily = 'rennerbook'),
                            saveAsImage_filename = list(),
                            ...) {
+
+  if (e_is_parallel(e))
+    UU::gwarn("This is a parallel type Echart, see {.code e_parallel_default_opts}")
+  e_funs <- lsf.str(pattern = "^e_", rlang::ns_env("echartsUtils"))
+  .dots <- rlang::dots_list(..., .named = TRUE)
+  named_args <- rlang::fn_fmls_names() |>
+    {\(x) {subset(x, !x %in% c("e", "..."))}}() |>
+    rlang::set_names() |>
+    purrr::map(get0, envir = environment()) |>
+    append(.dots) |>
+    {\(x) {rlang::set_names(x, paste0("e_", names(x)))}}()
+
+  out <- purrr::reduce2(named_args, names(named_args), ~ {
+    if (!is.null(..2) && !isFALSE(..2)) {
+      # NULL arg skips
+      .args <- purrr::when(..2,
+                           is.list(.) ~ ..2,
+                           . ~ list())
+      .call <- rlang::call2(..3, ..1, !!!.args, .ns = ifelse(..3 %in% e_funs, "echartsUtils", "echarts4r"))
+      out <- rlang::eval_bare(.call)
+    } else
+      out <- ..1
+
+    out
+  }, .init = e)
+
+
+  out
+}
+
+#' Add default options for Parallel Axis
+#'
+#' @param nameLocation \code{chr} \href{https://echarts.apache.org/en/option.html#parallel.parallelAxisDefault.nameLocation}{Link}
+#' @param nameGap \code{num} \href{https://echarts.apache.org/en/option.html#parallel.parallelAxisDefault.nameGap}{Link}
+#' @param axisLabel \code{list} \href{https://echarts.apache.org/en/option.html#parallel.parallelAxisDefault.axisLabel}{Link}
+#' @return \code{echart}
+#' @export
+#'
+
+e_parallelAxisDefault <- function(e,
+                                       nameLocation = 'end',
+                                       nameGap = 15,
+                                       axisLabel = list(
+                                         formatter = js_num2str()
+                                       ),
+                                       ...) {
+  if (!e_is_parallel(e))
+    UU::gbort("This is not a parallel type Echart.")
+
+  args <- list(nameLocation = nameLocation,
+               nameGap = nameGap,
+               axisLabel = axisLabel,
+               ...)
+  # Add the options if they don't exist. Must use bracket subset because $ partial matches on parallelAxis
+  if (is.null(e$x$opts[["parallel"]])) {
+    e$x$opts[["parallel"]] <- list()
+  }
+
+
+  # Modify the existing values
+  e$x$opts$parallel$parallelAxisDefault <- purrr::list_modify(e$x$opts$parallel$parallelAxisDefault %||% list(), !!!args)
+
+  return(e)
+}
+#' Use the default options for parallelAxis ECharts
+#'
+#' @inherit e_default_opts params return
+#' @export
+#'
+
+e_parallel_default_opts <- function(
+    e,
+    dims = TRUE,
+    grid = list(
+      containLabel = TRUE
+    ),
+    toolbox = list(orient = "vertical",
+                   itemSize = 8,
+                   itemGap = 3),
+    # toolbox_feature = list(feature = c("saveAsImage")),
+    tooltip = list(trigger = 'axis'),
+    saveAsImage_filename = list(),
+    parallelAxisDefault = TRUE,
+    ...
+) {
+  if (!e_is_parallel(e))
+    UU::gwarn("This is not a parallel type Echart, see {.code e_default_opts}")
   e_funs <- lsf.str(pattern = "^e_", rlang::ns_env("echartsUtils"))
   .dots <- rlang::dots_list(..., .named = TRUE)
   named_args <- rlang::fn_fmls_names() |>
