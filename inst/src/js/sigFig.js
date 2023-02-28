@@ -1,3 +1,6 @@
+function sigFig_length(x) {
+  return (x + "").split(".")[1].length;
+}
 /**
 * @param {Number} n value to round
 * @param {Number} sf Significant figures to round to
