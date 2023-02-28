@@ -77,6 +77,17 @@ e_opts_update <- function(e, opts, replace = FALSE) {
   e
 }
 
+#' Is the chart a parallelAxis chart?
+#'
+#' @param e \code{echart/htmlwidget}
+#'
+#' @return \code{lgl} whether or not the Echart is a parallel type chart
+#' @export
+#'
+
+e_is_parallel <- function(e) {
+  isTRUE(e$x$opts$series$type == "parallel")
+}
 
 #' Use the default options applied to each echart.
 #' @family options
