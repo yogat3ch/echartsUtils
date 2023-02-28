@@ -8,8 +8,8 @@
 #'
 #' @export
 
-e_saveAsImage_filename = function(e, name = "chart_download.png", watermark = TRUE) {
-  out <- echarts4r::e_toolbox_feature(e, feature = "saveAsImage", name = name)
+e_saveAsImage_filename = function(e, watermark = FALSE, name = "chart_download.png") {
+
   if (watermark) {
     onclick <- "function () {
           var ecModel = this.ecModel;
@@ -84,6 +84,8 @@ e_saveAsImage_filename = function(e, name = "chart_download.png", watermark = TR
         }
     }"
     out <- echarts4r::e_toolbox_feature(e, feature = "myWatermark", show = TRUE, onclick = htmlwidgets::JS(onclick), title = "Dl with Watermark", name = name, icon = 'M4.7,22.9L29.3,45.5L54.7,23.4M4.6,43.6L4.6,58L53.8,58L53.8,43.6M29.2,45.1L29.2,0', type = "png", excludeComponents = 'toolbox')
+  } else {
+    out <- echarts4r::e_toolbox_feature(e, feature = "saveAsImage", name = name)
   }
   return(out)
 }
