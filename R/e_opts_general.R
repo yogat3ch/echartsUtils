@@ -225,7 +225,7 @@ e_opts_parallel <- function(e,
   return(e)
 }
 #' Add default options for Parallel Axis
-#'
+#' @family options
 #' @param nameLocation \code{chr} \href{https://echarts.apache.org/en/option.html#parallel.parallelAxisDefault.nameLocation}{Link}
 #' @param nameGap \code{num} \href{https://echarts.apache.org/en/option.html#parallel.parallelAxisDefault.nameGap}{Link}
 #' @param axisLabel \code{list} \href{https://echarts.apache.org/en/option.html#parallel.parallelAxisDefault.axisLabel}{Link}
@@ -233,33 +233,32 @@ e_opts_parallel <- function(e,
 #' @export
 #'
 
-e_parallelAxisDefault <- function(e,
-                                       nameLocation = 'end',
-                                       nameGap = 15,
+e_opts_parallelAxisDefault <- function(e,
+                                       nameLocation = NULL,
+                                       nameGap = NULL,
                                        axisLabel = list(
-                                         formatter = js_num2str()
+                                         formatter = js_num2str(magnitude = FALSE)
                                        ),
                                        ...) {
   if (!e_is_parallel(e))
     UU::gbort("This is not a parallel type Echart.")
 
-  args <- list(nameLocation = nameLocation,
+  e <- e_opts_init(e, c("parallel", "parallelAxisDefault"))
+
+  args <- purrr::compact(list(nameLocation = nameLocation,
                nameGap = nameGap,
                axisLabel = axisLabel,
-               ...)
-  # Add the options if they don't exist. Must use bracket subset because $ partial matches on parallelAxis
-  if (is.null(e$x$opts[["parallel"]])) {
-    e$x$opts[["parallel"]] <- list()
-  }
+               ...))
 
-
-  # Modify the existing values
+# Modify the existing values
   e$x$opts$parallel$parallelAxisDefault <- purrr::list_modify(e$x$opts$parallel$parallelAxisDefault %||% list(), !!!args)
 
   return(e)
 }
+# TODO This should call an S3 method to switch between echarty and echarts4r methods
+
 #' Use the default options for parallelAxis ECharts
-#'
+#' @family options
 #' @inherit e_default_opts params return
 #' @export
 #'
