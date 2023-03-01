@@ -86,7 +86,13 @@ e_opts_update <- function(e, opts, replace = FALSE) {
 #'
 
 e_is_parallel <- function(e) {
-  isTRUE(e$x$opts$series$type == "parallel")
+  s <- e$x$opts$series
+  isTRUE(if (has_names(s)) {
+    s$type
+  } else {
+    s[[1]]$type
+  }  == "parallel")
+
 }
 
 #' Use the default options applied to each echart.
