@@ -60,7 +60,6 @@ The Javascript function is provided below for reference:
 #>   var suf_is_string = typeof add_suffix == 'string';
 #>   var do_magnitude = magnitude !== false
 #>   var o = undefined;
-#>   debugger;
 #>   if (!is_null(n)) \{
 #>     if (format) \{
 #>       if (suf_is_string && add_suffix == '\%') \{
