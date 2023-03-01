@@ -159,6 +159,22 @@ e_default_opts <- function(e,
 has_names <- function(x) {
   !is.null(names(x))
 }
+
+#' Initialize the options if they don't exist
+#' @param e \code{echart}
+#' @param names \code{chr} Name of the options to initialize. All top level headings on the \link{https://echarts.apache.org/en/option.html}{ECharts Option Documentation} are viable.
+#' @return echart
+
+e_opts_init <- function(e, ...) {
+  opts <- rlang::dots_list(...)
+  for (o in opts) {
+    for (i in seq_along(o)) {
+      if (is.null(purrr::pluck(e$x$opts, !!!as.list(o[1:i]))))
+        purrr::pluck(e$x$opts, !!!as.list(o[1:i])) <- list()
+    }
+  }
+  e
+}
 #' Add default options for Parallel Axis
 #'
 #' @param nameLocation \code{chr} \href{https://echarts.apache.org/en/option.html#parallel.parallelAxisDefault.nameLocation}{Link}
