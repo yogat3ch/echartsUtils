@@ -40,4 +40,3 @@ devtools::install_github("yogat3ch/echartsUtils")
 ```{r fns, echo = FALSE}
 bs4Dash::bs4Table(UU::fun_docs_table())
 ```
-

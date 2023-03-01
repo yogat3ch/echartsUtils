@@ -45,53 +45,11 @@ directory path generation convenience functions
 </td>
 </tr>
 <tr>
-<td>e_default_opts</td>
+<td>e_is_parallel</td>
 <td></td>
-<td>Use the default options applied to each echart.</td>
+<td>Is the chart a parallelAxis chart?</td>
 <td>
-Use the default options applied to each echart.
-
-Use the default options applied to each echart.
-</td>
-</tr>
-<tr>
-<td>e_get_opts</td>
-<td></td>
-<td>Get the options from an echart</td>
-<td>
-Get the options from an echart
-
-Get the options from an echart
-</td>
-</tr>
-<tr>
-<td>e_has_base_opts</td>
-<td></td>
-<td>Is the echart using baseOptions</td>
-<td>
-Is the echart using baseOptions
-
-Is the echart using baseOptions
-</td>
-</tr>
-<tr>
-<td>e_has_group</td>
-<td></td>
-<td>Does the echart have a group</td>
-<td>
-Does the echart have a group
-
-Does the echart have a group
-</td>
-</tr>
-<tr>
-<td>e_has_timeline</td>
-<td></td>
-<td>Does the echart have a timeline</td>
-<td>
-Does the echart have a timeline
-
-Does the echart have a timeline
+Is the chart a parallelAxis chart?
 </td>
 </tr>
 <tr>
@@ -103,73 +61,19 @@ A callback function with associated dependencies for formatting Echarts axisPoin
 </td>
 </tr>
 <tr>
-<td>e_opts_is_xAxis_series</td>
+<td>e_opts_axisPointer</td>
 <td></td>
-<td>Does the echart have xAxis options for each series (multiple unnamed lists with options)</td>
+<td>Default formatter for axisPointer</td>
 <td>
-Does the echart have xAxis options for each series (multiple unnamed lists with options)
-
-Does the echart have xAxis options for each series (multiple unnamed lists with options)
+Default formatter for axisPointer
 </td>
 </tr>
 <tr>
-<td>e_opts_line_default</td>
+<td>e_opts_init</td>
 <td></td>
-<td>Apply default options for a</td>
+<td>Initialize the options if they don't exist</td>
 <td>
-Apply default options for a
-</td>
-</tr>
-<tr>
-<td>e_opts_make_stacked_area_series</td>
-<td></td>
-<td>Makes an appropriately styled data list for stacked area charts for
-a single serie</td>
-<td>
-Makes an appropriately styled data list for stacked area charts for
-a single serie
-</td>
-</tr>
-<tr>
-<td>e_opts_modify</td>
-<td></td>
-<td>Modify echarts options</td>
-<td>
-Modify echarts options
-</td>
-</tr>
-<tr>
-<td>e_opts_update</td>
-<td></td>
-<td>Update echarts options</td>
-<td>
-Update echarts options
-</td>
-</tr>
-<tr>
-<td>e_opts_xAxis_type</td>
-<td></td>
-<td>Get the xAxis type</td>
-<td>
-Get the xAxis type
-
-Get the xAxis type
-</td>
-</tr>
-<tr>
-<td>e_opts_xAxis</td>
-<td></td>
-<td>Get x-axis options</td>
-<td>
-Get x-axis options
-</td>
-</tr>
-<tr>
-<td>e_opts_yAxis</td>
-<td></td>
-<td>Get y-axis options</td>
-<td>
-Get y-axis options
+Initialize the options if they don't exist
 </td>
 </tr>
 <tr>
@@ -183,40 +87,6 @@ the saveImageAs toolbox feature.
 </td>
 </tr>
 <tr>
-<td>e_series_axis_data</td>
-<td></td>
-<td>Extract data for a particular axis from an `axis_data`` tbl</td>
-<td>
-Extract data for a particular axis from an `axis_data`` tbl
-</td>
-</tr>
-<tr>
-<td>e_series_data</td>
-<td></td>
-<td>Extract the series data</td>
-<td>
-Extract the series data
-
-Extract the series data
-</td>
-</tr>
-<tr>
-<td>e_series_object</td>
-<td></td>
-<td>Retrieve a specific object from each series item</td>
-<td>
-Retrieve a specific object from each series item
-</td>
-</tr>
-<tr>
-<td>e_series</td>
-<td></td>
-<td>Get the series option from an echarts object</td>
-<td>
-Get the series option from an echarts object
-</td>
-</tr>
-<tr>
 <td>e_tooltip_legend_dot</td>
 <td></td>
 <td>Create an echarts style legend dot</td>
@@ -225,38 +95,21 @@ Create an echarts style legend dot
 </td>
 </tr>
 <tr>
-<td>e_x_axis_formatting</td>
+<td>ec_toolbox</td>
 <td></td>
-<td>e_x_axis_year_formatting</td>
+<td>Add default toolbox options to echart
+Add ability to save as image, restore, zoom and reset zoom to an echart</td>
 <td>
-generates a list that configures the min/max and correct axis formatting
-for echarts figs
+Add default toolbox options to echart
+Add ability to save as image, restore, zoom and reset zoom to an echart
 </td>
 </tr>
 <tr>
-<td>e_y_axis_formatting</td>
+<td>echartsUtils-package</td>
 <td></td>
-<td>e_y_axis_year_formatting</td>
+<td>echartsUtils: Tools for working with echarts</td>
 <td>
-generates a list that configures the correct y axis formatting for echarts figs
-</td>
-</tr>
-<tr>
-<td>e_yAxis_width</td>
-<td></td>
-<td>Calculate a best guess nameGap value for spacing the ECharts axis titles beyond the axis labels</td>
-<td>
-Calculate a best guess nameGap value for spacing the ECharts axis titles beyond the axis labels
-</td>
-</tr>
-<tr>
-<td>e_year_on_x</td>
-<td></td>
-<td>Is the X axis in years?</td>
-<td>
-Is the X axis in years?
-
-Is the X axis in years?
+Utility functions for working with echarts objects created by echarts4r &amp; echarty
 </td>
 </tr>
 <tr>
@@ -286,7 +139,7 @@ below to see their documentation.
 
   rlang%|%, %||%
 
-  UU%|0|%, %|legit|%, %|try|%, %|zchar|%
+  UU%|0|%, %|legit|%, %|try|%, %|zchar|%, %nin%
 </td>
 </tr>
 <tr>
@@ -295,6 +148,213 @@ below to see their documentation.
 <td>Use dependencies for echartsUtils</td>
 <td>
 Use dependencies for echartsUtils
+</td>
+</tr>
+<tr>
+<td>e_series_axis_data</td>
+<td>data</td>
+<td>Extract data for a particular axis from an `axis_data`` tbl</td>
+<td>
+Extract data for a particular axis from an `axis_data`` tbl
+</td>
+</tr>
+<tr>
+<td>e_series_data</td>
+<td>data</td>
+<td>Extract the series data</td>
+<td>
+Extract the series data
+</td>
+</tr>
+<tr>
+<td>e_year_on_x</td>
+<td>data</td>
+<td>Is the X axis in years?</td>
+<td>
+Is the X axis in years?
+</td>
+</tr>
+<tr>
+<td>e_opts_line_default</td>
+<td>line</td>
+<td>A list of default options for an echart line</td>
+<td>
+A list of default options for an echart line
+</td>
+</tr>
+<tr>
+<td>e_opts_make_stacked_area_series</td>
+<td>line</td>
+<td>Makes an appropriately styled data list for stacked area charts for
+a single serie</td>
+<td>
+Makes an appropriately styled data list for stacked area charts for
+a single serie
+</td>
+</tr>
+<tr>
+<td>e_default_opts</td>
+<td>options</td>
+<td>Use the default options applied to each echart.</td>
+<td>
+Use the default options applied to each echart.
+</td>
+</tr>
+<tr>
+<td>e_get_opts</td>
+<td>options</td>
+<td>Get the options from an echart</td>
+<td>
+Get the options from an echart
+
+Get the options from an echart
+</td>
+</tr>
+<tr>
+<td>e_has_base_opts</td>
+<td>options</td>
+<td>Is the echart using baseOptions</td>
+<td>
+Is the echart using baseOptions
+
+Is the echart using baseOptions
+</td>
+</tr>
+<tr>
+<td>e_has_group</td>
+<td>options</td>
+<td>Does the echart have a group</td>
+<td>
+Does the echart have a group
+
+Does the echart have a group
+</td>
+</tr>
+<tr>
+<td>e_has_timeline</td>
+<td>options</td>
+<td>Does the echart have a timeline</td>
+<td>
+Does the echart have a timeline
+
+Does the echart have a timeline
+</td>
+</tr>
+<tr>
+<td>e_opts_is_xAxis_series</td>
+<td>options</td>
+<td>Does the echart have xAxis options for each series (multiple unnamed lists with options)</td>
+<td>
+Does the echart have xAxis options for each series (multiple unnamed lists with options)
+
+Does the echart have xAxis options for each series (multiple unnamed lists with options)
+</td>
+</tr>
+<tr>
+<td>e_opts_modify</td>
+<td>options</td>
+<td>Modify echarts options</td>
+<td>
+Modify echarts options
+</td>
+</tr>
+<tr>
+<td>e_opts_parallel</td>
+<td>options</td>
+<td>Modify parallel options</td>
+<td>
+Modify parallel options
+</td>
+</tr>
+<tr>
+<td>e_opts_parallelAxisDefault</td>
+<td>options</td>
+<td>Add default options for Parallel Axis</td>
+<td>
+Add default options for Parallel Axis
+</td>
+</tr>
+<tr>
+<td>e_opts_update</td>
+<td>options</td>
+<td>Update echarts options</td>
+<td>
+Update echarts options
+</td>
+</tr>
+<tr>
+<td>e_opts_xAxis_type</td>
+<td>options</td>
+<td>Get the xAxis type</td>
+<td>
+Get the xAxis type
+
+Get the xAxis type
+</td>
+</tr>
+<tr>
+<td>e_opts_xAxis</td>
+<td>options</td>
+<td>Get x-axis options</td>
+<td>
+Get x-axis options
+</td>
+</tr>
+<tr>
+<td>e_opts_yAxis</td>
+<td>options</td>
+<td>Get y-axis options</td>
+<td>
+Get y-axis options
+</td>
+</tr>
+<tr>
+<td>e_parallel_default_opts</td>
+<td>options</td>
+<td>Use the default options for parallelAxis ECharts</td>
+<td>
+Use the default options for parallelAxis ECharts
+</td>
+</tr>
+<tr>
+<td>e_series</td>
+<td>options</td>
+<td>Get the series option from an echarts object</td>
+<td>
+Get the series option from an echarts object
+</td>
+</tr>
+<tr>
+<td>e_x_axis_formatting</td>
+<td>options</td>
+<td>e_x_axis_year_formatting</td>
+<td>
+generates a list that configures the min/max and correct axis formatting
+for echarts figs
+</td>
+</tr>
+<tr>
+<td>e_y_axis_formatting</td>
+<td>options</td>
+<td>e_y_axis_year_formatting</td>
+<td>
+generates a list that configures the correct y axis formatting for echarts figs
+</td>
+</tr>
+<tr>
+<td>e_yAxis_width</td>
+<td>options</td>
+<td>Calculate a best guess nameGap value for spacing the ECharts axis titles beyond the axis labels</td>
+<td>
+Calculate a best guess nameGap value for spacing the ECharts axis titles beyond the axis labels
+</td>
+</tr>
+<tr>
+<td>e_series_object</td>
+<td>series</td>
+<td>Retrieve a specific object from each series item</td>
+<td>
+Retrieve a specific object from each series item
 </td>
 </tr>
 </tbody>
