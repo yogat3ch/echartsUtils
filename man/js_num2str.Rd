@@ -60,6 +60,7 @@ The Javascript function is provided below for reference:
 #>   var suf_is_string = typeof add_suffix == 'string';
 #>   var do_magnitude = magnitude !== false
 #>   var o = undefined;
+#>   debugger;
 #>   if (!is_null(n)) \{
 #>     if (format) \{
 #>       if (suf_is_string && add_suffix == '\%') \{
@@ -69,13 +70,16 @@ The Javascript function is provided below for reference:
 #>           o = parseFloat(n);
 #>         \}
 #>       \} else \{
-#>         var suf = ["", "K", "M", "B"];
-#>         var out = [];
-#>         for (var i = 0; i < suf.length; i++) \{
-#>           // test multiples of 1000
-#>           out.push(n / (10 ** (i * 3)));
+#>         if (do_magnitude || add_suffix) \{
+#>           var suf = ["", "K", "M", "B"];
+#>           var out = [];
+#>           for (var i = 0; i < suf.length; i++) \{
+#>             // test multiples of 1000
+#>             out.push(n / (10 ** (i * 3)));
+#>           \}
 #>         \}
-#>         if (magnitude !== null) \{
+#>         
+#>         if (magnitude !== null && magnitude !== false) \{
 #>           var i = suf.indexOf(magnitude)
 #>           o = out[i]
 #>           // index of the lowest suffix requested
@@ -110,6 +114,8 @@ The Javascript function is provided below for reference:
 #>         // otherwise just format for humans
 #>         o = sigFig(n, sf = sf);
 #>       \}
+#>     \} else \{
+#>       o = n;
 #>     \} 
 #>   \} else \{
 #>     var o = 'NA';
