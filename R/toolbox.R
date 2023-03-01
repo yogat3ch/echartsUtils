@@ -89,3 +89,52 @@ e_saveAsImage_filename = function(e, watermark = FALSE, name = "chart_download.p
   }
   return(out)
 }
+
+
+
+#' Add default toolbox options to echart
+#' Add ability to save as image, restore, zoom and reset zoom to an echart
+#' @param p \code{echarty}
+#' @param opts \code{list} All options to be applied. Comes with defaults.
+#' @param opts_merge \code{list} Options to be added. See \link[purrr]{list_merge}
+#' @param opts_modify \code{list} Options to be replaced. See \link[purrr]{list_modify}
+#' @param minimal \code{boolean} whether or not to add minimal toolbox (currently
+#' defined as just export to image by BoR) to a chart
+#'
+#' @return \code{echarty}
+#' @export
+
+ec_toolbox <-
+  function(e,
+           opts = list(
+             orient = "vertical",
+             feature = list(
+               saveAsImage = list(
+                 title = shiny::getDefaultReactiveDomain()$ns("chart")
+               ),
+               restore = list(),
+               dataZoom = list()
+             )
+           ),
+           opts_merge = NULL,
+           opts_modify = NULL,
+           minimal = FALSE) {
+
+
+    if (!is.null(opts_merge)) {
+      opts <- purrr::list_merge(opts, !!!opts_merge)
+    }
+    if (!is.null(opts_modify)) {
+      opts <- purrr::list_modify(opts, !!!opts_modify)
+    }
+
+    if (isTRUE(minimal)) {
+      opts$feature <- list(
+        saveAsImage = list()
+      )
+    }
+
+    e$x$opts$toolbox <- opts
+
+    e
+  }
