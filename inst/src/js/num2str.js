@@ -67,6 +67,8 @@ function num2str ({n, sf = 2, add_suffix = false, suffix_lb = "", format = true,
         // otherwise just format for humans
         o = sigFig(n, sf = sf);
       }
+    } else {
+      o = n;
     } 
   } else {
     var o = 'NA';
