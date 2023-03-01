@@ -23,13 +23,16 @@ function num2str ({n, sf = 2, add_suffix = false, suffix_lb = "", format = true,
           o = parseFloat(n);
         }
       } else {
-        var suf = ["", "K", "M", "B"];
-        var out = [];
-        for (var i = 0; i < suf.length; i++) {
-          // test multiples of 1000
-          out.push(n / (10 ** (i * 3)));
+        if (do_magnitude || add_suffix) {
+          var suf = ["", "K", "M", "B"];
+          var out = [];
+          for (var i = 0; i < suf.length; i++) {
+            // test multiples of 1000
+            out.push(n / (10 ** (i * 3)));
+          }
         }
-        if (magnitude !== null) {
+        
+        if (magnitude !== null && magnitude !== false) {
           var i = suf.indexOf(magnitude)
           o = out[i]
           // index of the lowest suffix requested
