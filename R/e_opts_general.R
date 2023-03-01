@@ -175,6 +175,55 @@ e_opts_init <- function(e, ...) {
   }
   e
 }
+#' Modify parallel options
+#' @family options
+#' @param e \code{echart}
+#' @param top \code{num} See \link{https://echarts.apache.org/en/option.html#parallel.top}{Docs}. **Default: 60**
+#' @param right \code{num} See \link{https://echarts.apache.org/en/option.html#parallel.right}{Docs}. **Default: 80**
+#' @param bottom \code{num} See \link{https://echarts.apache.org/en/option.html#parallel.bottom}{Docs}. **Default: 60**
+#' @param left \code{num} See \link{https://echarts.apache.org/en/option.html#parallel.left}{Docs}. **Default: 80**
+#' @param layout \code{chr} See \link{https://echarts.apache.org/en/option.html#parallel.layout}{Docs}. **Default: 'horizontal'**
+#' @param parallelAxisDefault See \link{https://echarts.apache.org/en/option.html#parallel.parallelAxisDefault}{Docs} for all available options. ** Default: axisLabel formatter set to `js_num2str` with default options **
+#' @param ... See \link{https://echarts.apache.org/en/option.html#parallel}{Docs} for all available options
+#'
+#' @return \code{echart}
+#' @export
+
+e_opts_parallel <- function(e,
+                            top = NULL,
+                            right = NULL,
+                            bottom = NULL,
+                            left = NULL,
+                            layout = NULL,
+                            ...,
+                            parallelAxisDefault = list(
+                              axisLabel = list(
+                                formatter = js_num2str(magnitude = FALSE)
+                              )
+                            )) {
+  if (!e_is_parallel(e))
+    UU::gbort("This is not a parallel type Echart.")
+
+  e <- e_opts_init(e, c("parallel", "parallelAxisDefault"))
+  args <-
+    purrr::compact(
+      list(
+        top = top,
+        right = right,
+        bottom = bottom,
+        left = left,
+        layout = layout,
+        ...
+      )
+    )
+  # Modify the existing values
+  e$x$opts$parallel <- purrr::list_modify(e$x$opts$parallel, !!!args)
+  e <- rlang::exec(e_opts_parallelAxisDefault,
+              e,
+              !!!parallelAxisDefault)
+
+  return(e)
+}
 #' Add default options for Parallel Axis
 #'
 #' @param nameLocation \code{chr} \href{https://echarts.apache.org/en/option.html#parallel.parallelAxisDefault.nameLocation}{Link}
