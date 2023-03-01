@@ -150,6 +150,9 @@ e_default_opts <- function(e,
   out
 }
 
+has_names <- function(x) {
+  !is.null(names(x))
+}
 #' Add default options for Parallel Axis
 #'
 #' @param nameLocation \code{chr} \href{https://echarts.apache.org/en/option.html#parallel.parallelAxisDefault.nameLocation}{Link}
