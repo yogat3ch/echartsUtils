@@ -41,6 +41,28 @@ e_has_timeline <- function(e) {
   !is.null(e_get_opts(e)$timeline)
 }
 
+#' Modify an echarts option that may be an unnamed or named list
+#'
+#' @param opt \code{list} An echart option list
+#' @param new_opts \code{list} options to add
+#'
+#' @return \code{list} the modified option
+#' @export
+#'
+
+e_opt_modify <- function(opt, new_opts) {
+  # If not initialized initialize it
+  opt <- opt %||% list()
+  out <- if (is.null(names(opt))) {
+    purrr::map(opt, \(.x) {
+      purrr::list_modify(.x, !!!new_opts)
+    })
+  } else {
+    purrr::list_modify(opt, !!!new_opts)
+  }
+  return(out)
+}
+
 #' Modify echarts options
 #'
 #' @param e \code{echart}
