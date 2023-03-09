@@ -1,6 +1,6 @@
 Package: echartsUtils
 Title: Tools for working with echarts
-Version: 0.4.3
+Version: 0.4.4
 Authors@R: 
     person("Stephen", "Holsenbeck", , "sholsen@alumni.emory.edu", role = c("aut", "cre"))
 Description: Utility functions for working with echarts objects created by echarts4r & echarty
