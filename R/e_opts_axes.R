@@ -476,6 +476,7 @@ e_y_axis_formatting <- function(e,
                            !!!.args)
   }
 
+  .dots <- rlang::dots_list(...)
   new_opts <- purrr::compact(purrr::list_modify(rlang::list2(
     scale = scale,
     type = type,
@@ -490,7 +491,6 @@ e_y_axis_formatting <- function(e,
     !!!.dots)
   )
   # Modify rather than replace
-  .dots <- rlang::dots_list(...)
   out =
     rlang::exec(
       echarts4r::e_y_axis,
