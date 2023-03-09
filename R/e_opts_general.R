@@ -216,12 +216,9 @@ e_opts_parallel <- function(e,
                             bottom = NULL,
                             left = NULL,
                             layout = NULL,
-                            ...,
-                            parallelAxisDefault = list(
-                              axisLabel = list(
-                                formatter = js_num2str(magnitude = FALSE)
-                              )
-                            )) {
+                            parallelAxisDefault = list(),
+                            ...
+                            ) {
   if (!e_is_parallel(e))
     UU::gbort("This is not a parallel type Echart.")
 
@@ -239,9 +236,6 @@ e_opts_parallel <- function(e,
     )
   # Modify the existing values
   e$x$opts$parallel <- purrr::list_modify(e$x$opts$parallel, !!!args)
-  e <- rlang::exec(e_opts_parallelAxisDefault,
-              e,
-              !!!parallelAxisDefault)
 
   return(e)
 }
@@ -257,9 +251,6 @@ e_opts_parallel <- function(e,
 e_opts_parallelAxisDefault <- function(e,
                                        nameLocation = NULL,
                                        nameGap = NULL,
-                                       axisLabel = list(
-                                         formatter = js_num2str(magnitude = FALSE)
-                                       ),
                                        ...) {
   if (!e_is_parallel(e))
     UU::gbort("This is not a parallel type Echart.")
@@ -268,7 +259,6 @@ e_opts_parallelAxisDefault <- function(e,
 
   args <- purrr::compact(list(nameLocation = nameLocation,
                nameGap = nameGap,
-               axisLabel = axisLabel,
                ...))
 
 # Modify the existing values
