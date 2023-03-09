@@ -381,33 +381,34 @@ e_x_axis_formatting = function(e,
       )
     )
   }
+  new_opts <- purrr::compact(purrr::list_modify(
+    list(
+      scale = scale,
+      type = type,
+      axisLabel = purrr::compact(
+        list(
+          formatter = formatter,
+          rotate = rotate,
+          fontFamily = fontFamily
+        )
+      ),
+      min = min,
+      max = max,
+      name = name,
+      nameLocation = nameLocation,
+      nameTextStyle = nameTextStyle,
+      nameGap = nameGap
+    ),
+    !!!.dots
+  ))
   # Modify rather than replace
   out =
     rlang::exec(
       echarts4r::e_x_axis,
       e,
-      !!!purrr::list_modify(
-        e_opts_xAxis(e) %||% list(),
-        !!!purrr::compact(purrr::list_modify(
-          list(
-            scale = scale,
-            type = type,
-            axisLabel = purrr::compact(
-              list(
-                formatter = formatter,
-                rotate = rotate,
-                fontFamily = fontFamily
-              )
-            ),
-            min = min,
-            max = max,
-            name = name,
-            nameLocation = nameLocation,
-            nameTextStyle = nameTextStyle,
-            nameGap = nameGap
-          ),
-          !!!.dots
-        ))
+      !!!e_opt_modify(
+        e_opts_xAxis(e),
+        new_opts
       )
     )
 
@@ -475,27 +476,28 @@ e_y_axis_formatting <- function(e,
                            !!!.args)
   }
 
+  new_opts <- purrr::compact(purrr::list_modify(rlang::list2(
+    scale = scale,
+    type = type,
+    axisLabel = purrr::compact(list(
+      formatter = formatter
+    )),
+    name = name,
+    nameLocation = nameLocation,
+    nameTextStyle = nameTextStyle,
+    nameGap = nameGap,
+    axisPointer = axisPointer),
+    !!!.dots)
+  )
   # Modify rather than replace
   .dots <- rlang::dots_list(...)
   out =
     rlang::exec(
       echarts4r::e_y_axis,
       e,
-      !!!purrr::list_modify(
-        e_opts_yAxis(e) %||% list(),
-        !!!purrr::compact(purrr::list_modify(rlang::list2(
-          scale = scale,
-          type = type,
-          axisLabel = purrr::compact(list(
-            formatter = formatter
-          )),
-          name = name,
-          nameLocation = nameLocation,
-          nameTextStyle = nameTextStyle,
-          nameGap = nameGap,
-          axisPointer = axisPointer),
-          !!!.dots)
-        )
+      !!!e_opt_modify(
+        e_opts_yAxis(e),
+        new_opts
       )
     )
   # Handle echarts `grid` options ----
@@ -503,18 +505,11 @@ e_y_axis_formatting <- function(e,
   # NOTE echarts4r adds rather than replaces grid options causing modified value not to take effect (echarts uses the first relevant value as the option). This code modifies the grid options in place such that they take effect upon modification
   # Retrieve the options for modification
   opts <- e_get_opts(out)
+
+
   # Add grid spacing so labels & titles show properly
-  grid <- opts$grid %||% list()
+  opts$grid <- e_opt_modify(opts$grid, list(containLabel = TRUE))
 
-  grid <- if (purrr::vec_depth(grid) > 2) {
-    purrr::map(
-      grid,
-      ~ purrr::list_modify(.x, containLabel = TRUE))
-  } else {
-    purrr::list_modify(grid, containLabel = TRUE)
-  }
-
-  opts$grid <- grid
 
 
   # reassign options
