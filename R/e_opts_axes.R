@@ -14,15 +14,20 @@ e_opts_yAxis <- function(e) {
 
 #' @export
 e_opts_yAxis.echarty <- function(e) {
-  e_opts_unnest(e_get_opts(e)$yAxis)
+  e_get_opts(e)$yAxis %||% list()
 }
 #' @export
 e_opts_yAxis.echarts4r <- e_opts_yAxis.echarty
 #' @export
 e_opts_yAxis.list <- function(e) {
-  e_opts_unnest(e$yAxis)
+  e_get_opts(e)$yAxis %||% list()
 }
 
+e_opts_unnest <- function(opts) {
+  if (length(opts) == 1 && is.null(names(opts)))
+    opts <- opts[[1]]
+  return(opts)
+}
 #' Get x-axis options
 #'
 #' @param e \code{htmlwidget/list} An echarts objects or an options list
@@ -36,20 +41,15 @@ e_opts_xAxis <- function(e) {
   UseMethod("e_opts_xAxis")
 }
 
-e_opts_unnest <- function(opts) {
-  if (length(opts) == 1 && is.null(names(opts)))
-    opts <- opts[[1]]
-  return(opts)
-}
 #' @export
 e_opts_xAxis.echarty <- function(e) {
-  e_opts_unnest(e_get_opts(e)$xAxis)
+  e_get_opts(e)$xAxis %||% list()
 }
 #' @export
 e_opts_xAxis.echarts4r <- e_opts_xAxis.echarty
 #' @export
 e_opts_xAxis.list <- function(e) {
-  e_opts_unnest(e$xAxis)
+  e_get_opts(e)$xAxis %||% list()
 }
 
 e_yAxis_opts_lists <- c(
