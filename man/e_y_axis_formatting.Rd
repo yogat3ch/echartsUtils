@@ -9,10 +9,9 @@ e_y_axis_formatting(
   scale = TRUE,
   type = "value",
   formatter = echartsUtils::js_num2str(),
-  fontFamily = "rennerbook",
   name = NULL,
   nameLocation = "middle",
-  nameTextStyle = list(padding = c(0, 0, 0, 0), fontFamily = "rennerbook"),
+  nameTextStyle = list(padding = c(0, 0, 0, 0)),
   nameGap = "auto",
   mo = NULL,
   axisPointer = e_opts_axisPointer(),
@@ -20,8 +19,6 @@ e_y_axis_formatting(
 )
 }
 \arguments{
-\item{fontFamily}{\code{chr} CSS font-family}
-
 \item{name}{\code{chr} Axis label}
 
 \item{nameLocation}{\code{chr} Where to position the axis label. \strong{Default 'middle'}}
@@ -44,6 +41,8 @@ a proxy as returned by \code{\link[echarts4r]{echarts4rProxy}}.}
     \item{\code{margin}}{Margin to apply to \code{serie}: \eqn{min = serie - margin} and
 \eqn{max = serie + margin}}
   }}
+
+\item{fontFamily}{\code{chr} CSS font-family}
 }
 \value{
 A list of parameters for appropriate y-axis formatting for years on echarts figures

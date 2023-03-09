@@ -14,7 +14,6 @@ e_default_opts(
   x_axis_formatting = TRUE,
   y_axis_formatting = TRUE,
   tooltip = list(trigger = "axis"),
-  text_style = list(fontFamily = "rennerbook"),
   saveAsImage_filename = list(),
   ...
 )

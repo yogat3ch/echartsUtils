@@ -357,7 +357,7 @@ e_x_axis_formatting = function(e,
                                  "Year"
                                },
                                nameLocation = "middle",
-                               nameTextStyle = list(padding = rep(0, 4), fontFamily = "rennerbook"),
+                               nameTextStyle = list(padding = rep(0, 4)),
                                nameGap = 35,
                                formatter = htmlwidgets::JS(
                                  "function(value, index){
@@ -365,7 +365,6 @@ e_x_axis_formatting = function(e,
        }"
                                ),
        rotate = 45,
-       fontFamily = "rennerbook",
        ...) {
   x <- e_series_axis_data(e_series_data(e), axis = "x")
   force(name)
@@ -436,10 +435,9 @@ e_y_axis_formatting <- function(e,
                                 scale = TRUE,
                                 type = 'value',
                                 formatter = echartsUtils::js_num2str(),
-                                fontFamily = "rennerbook",
                                 name = NULL,
                                 nameLocation = "middle",
-                                nameTextStyle = list(padding = c(0,0,0,0), fontFamily = "rennerbook"),
+                                nameTextStyle = list(padding = c(0,0,0,0)),
                                 nameGap = 'auto',
                                 mo = NULL,
                                 axisPointer = e_opts_axisPointer(),

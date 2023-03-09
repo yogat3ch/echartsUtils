@@ -14,12 +14,11 @@ e_x_axis_formatting(
      "Year"
  },
   nameLocation = "middle",
-  nameTextStyle = list(padding = rep(0, 4), fontFamily = "rennerbook"),
+  nameTextStyle = list(padding = rep(0, 4)),
   nameGap = 35,
   formatter =
     htmlwidgets::JS("function(value, index){\\n          return typeof value == 'number' ? parseFloat(value) : value;\\n       }"),
   rotate = 45,
-  fontFamily = "rennerbook",
   ...
 )
 }
