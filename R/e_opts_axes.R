@@ -434,7 +434,7 @@ e_x_axis_formatting = function(e,
 e_y_axis_formatting <- function(e,
                                 scale = TRUE,
                                 type = 'value',
-                                formatter = echartsUtils::js_num2str(),
+                                formatter = NULL,
                                 name = NULL,
                                 nameLocation = "middle",
                                 nameTextStyle = list(padding = c(0,0,0,0)),
@@ -487,8 +487,7 @@ e_y_axis_formatting <- function(e,
           scale = scale,
           type = type,
           axisLabel = purrr::compact(list(
-            formatter = formatter,
-            fontFamily = fontFamily
+            formatter = formatter
           )),
           name = name,
           nameLocation = nameLocation,
