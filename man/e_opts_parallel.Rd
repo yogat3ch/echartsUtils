@@ -11,8 +11,8 @@ e_opts_parallel(
   bottom = NULL,
   left = NULL,
   layout = NULL,
-  ...,
-  parallelAxisDefault = list(axisLabel = list(formatter = js_num2str(magnitude = FALSE)))
+  parallelAxisDefault = list(),
+  ...
 )
 }
 \arguments{
@@ -28,9 +28,9 @@ e_opts_parallel(
 
 \item{layout}{\code{chr} See \link{https://echarts.apache.org/en/option.html#parallel.layout}{Docs}. \strong{Default: 'horizontal'}}
 
-\item{...}{See \link{https://echarts.apache.org/en/option.html#parallel}{Docs} for all available options}
-
 \item{parallelAxisDefault}{See \link{https://echarts.apache.org/en/option.html#parallel.parallelAxisDefault}{Docs} for all available options. ** Default: axisLabel formatter set to \code{js_num2str} with default options **}
+
+\item{...}{See \link{https://echarts.apache.org/en/option.html#parallel}{Docs} for all available options}
 }
 \value{
 \code{echart}

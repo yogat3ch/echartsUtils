@@ -4,13 +4,7 @@
 \alias{e_opts_parallelAxisDefault}
 \title{Add default options for Parallel Axis}
 \usage{
-e_opts_parallelAxisDefault(
-  e,
-  nameLocation = NULL,
-  nameGap = NULL,
-  axisLabel = list(formatter = js_num2str(magnitude = FALSE)),
-  ...
-)
+e_opts_parallelAxisDefault(e, nameLocation = NULL, nameGap = NULL, ...)
 }
 \arguments{
 \item{nameLocation}{\code{chr} \href{https://echarts.apache.org/en/option.html#parallel.parallelAxisDefault.nameLocation}{Link}}
