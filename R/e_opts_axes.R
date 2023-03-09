@@ -228,7 +228,7 @@ e_series_data <- function(e) {
 
 e_series_axis_data <- function(axis_data, axis = "x", flat = TRUE) {
   to_numeric <-  \(.x) {
-    out <- as.numeric(.x)
+    out <- as.numeric(unlist(.x))
     if (UU::most(!is.na(out)))
       out
     else
