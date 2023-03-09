@@ -45,20 +45,26 @@ e_has_timeline <- function(e) {
 #'
 #' @param opt \code{list} An echart option list
 #' @param new_opts \code{list} options to add
-#'
+#' @param unnest_result \code{lgl} whether result should be a non-nested list (typically used when passed to a function that handles that internally when modifying the echart such as \code{\link[echarts4r]{e_y_axis}})
 #' @return \code{list} the modified option
 #' @export
 #'
 
-e_opt_modify <- function(opt, new_opts) {
+e_opt_modify <- function(opt, new_opts, unnest_result = FALSE) {
   # If not initialized initialize it
   opt <- opt %||% list()
-  out <- if (is.null(names(opt))) {
+  is_nested <- purrr::vec_depth(opt) > 2
+
+  out <- if (is_nested) {
     purrr::map(opt, \(.x) {
       purrr::list_modify(.x, !!!new_opts)
     })
   } else {
     purrr::list_modify(opt, !!!new_opts)
+  }
+
+  if (unnest_result) {
+    out <- e_opts_unnest(out)
   }
   return(out)
 }

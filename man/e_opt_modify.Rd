@@ -4,12 +4,14 @@
 \alias{e_opt_modify}
 \title{Modify an echarts option that may be an unnamed or named list}
 \usage{
-e_opt_modify(opt, new_opts)
+e_opt_modify(opt, new_opts, unnest_result = FALSE)
 }
 \arguments{
 \item{opt}{\code{list} An echart option list}
 
 \item{new_opts}{\code{list} options to add}
+
+\item{unnest_result}{\code{lgl} whether result should be a non-nested list (typically used when passed to a function that handles that internally when modifying the echart such as \code{\link[echarts4r]{e_y_axis}})}
 }
 \value{
 \code{list} the modified option

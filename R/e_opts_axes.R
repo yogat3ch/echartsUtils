@@ -408,7 +408,8 @@ e_x_axis_formatting = function(e,
       e,
       !!!e_opt_modify(
         e_opts_xAxis(e),
-        new_opts
+        new_opts,
+        unnest_result = TRUE
       )
     )
 
@@ -491,13 +492,15 @@ e_y_axis_formatting <- function(e,
     !!!.dots)
   )
   # Modify rather than replace
+
   out =
     rlang::exec(
       echarts4r::e_y_axis,
       e,
       !!!e_opt_modify(
         e_opts_yAxis(e),
-        new_opts
+        new_opts,
+        unnest_result = TRUE
       )
     )
   # Handle echarts `grid` options ----
