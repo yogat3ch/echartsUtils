@@ -12,6 +12,7 @@ Imports:
     echarts4r,
     htmlwidgets,
     lifecycle,
+    packer (>= 0.1.3),
     pkgload,
     purrr,
     rlang,

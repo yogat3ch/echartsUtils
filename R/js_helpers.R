@@ -5,7 +5,7 @@
 #'
 
 use_js_deps <- function() {
-  js_src <- system.file("src", "js", package = "echartsUtils")
+  js_src <- system.file("srcjs", package = "echartsUtils")
   deps <-
     tibble::tibble(
       name = c("axisPointer", "sigFig", "addCommas", "num2str", "helpers"),
@@ -23,7 +23,7 @@ use_js_deps <- function() {
   )
 }
 .js_num2str <-
-  function(filename = system.file("src", "js", "num2str.js", package = "echartsUtils")) {
+  function(filename = system.file("srcjs", "num2str.js", package = "echartsUtils")) {
     UU::read_js(filename)
   }
 

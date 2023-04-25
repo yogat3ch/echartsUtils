@@ -30,7 +30,6 @@ function sigFig(n, sf = 0) {
       // Numbers without decimal places
       var out = n.toPrecision(log10 + 1);
     }
-  
+
      return out;
   }
-  

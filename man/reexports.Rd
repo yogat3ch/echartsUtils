@@ -19,6 +19,6 @@ below to see their documentation.
 \describe{
   \item{rlang}{\code{\link[rlang:op-na-default]{\%|\%}}, \code{\link[rlang:op-null-default]{\%||\%}}}
 
-  \item{UU}{\code{\link[UU:grapes-or-0-or-grapes]{\%|0|\%}}, \code{\link[UU:grapes-or-legit-or-grapes]{\%|legit|\%}}, \code{\link[UU:tick-grapes-or-try-or-grapes-tick]{\%|try|\%}}, \code{\link[UU:grapes-or-zchar-or-grapes]{\%|zchar|\%}}, \code{\link[UU:grapes-nin-grapes]{\%nin\%}}}
+  \item{UU}{\code{\link[UU:grapes-or-0-or-grapes]{\%|0|\%}}, \code{\link[UU:grapes-or-legit-or-grapes]{\%|legit|\%}}, \code{\link[UU:grapes-or-try-or-grapes]{\%|try|\%}}, \code{\link[UU:grapes-or-zchar-or-grapes]{\%|zchar|\%}}, \code{\link[UU:grapes-nin-grapes]{\%nin\%}}}
 }}
 
