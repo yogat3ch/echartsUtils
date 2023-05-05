@@ -396,8 +396,7 @@ e_x_axis_formatting = function(e,
       axisLabel = purrr::compact(
         list(
           formatter = formatter,
-          rotate = rotate,
-          fontFamily = fontFamily
+          rotate = rotate
         )
       ),
       min = min,
