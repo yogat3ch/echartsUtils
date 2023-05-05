@@ -188,6 +188,14 @@ e_series_data <- function(e) {
       })
 
 
+    } else if ("line" %in% names(.encode)) {
+      i <- which(names(.encode) == "line")
+      out <- purrr::map2(.data[i], .encode[i], \(.x,.y) {
+        d <- unname(purrr::list_flatten(.x))
+        dplyr::bind_rows(purrr::map(.y, \(.x) {
+          unlist(purrr::map(d, .x))
+        }))
+      })
     } else {
       parallel <- unique(names(.encode)) == "parallel"
       out <- try(purrr::map2(.data, .encode, ~{
