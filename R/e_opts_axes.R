@@ -424,6 +424,7 @@ e_x_axis_formatting = function(e,
 }
 
 
+
 #' e_y_axis_year_formatting
 #' @description generates a list that configures the correct y axis formatting for echarts figs
 #' @family options
@@ -436,6 +437,7 @@ e_x_axis_formatting = function(e,
 #' @param nameTextStyle \code{list} With named parameters. See \href{https://echarts.apache.org/en/option.html#yAxis.nameTextStyle}{Echarts yAxis.nameTextStyle}
 #' @param nameGap \code{num/chr} **Default: 'auto'** uses custom heuristics to determine a best guess. See \link{axis_width}. Otherwise a numeric pixel value
 #' @param mo \code{int} of the magnitude of the units. 9 = Billions, 6 = Millions etc
+#' @param axisPointer Configuration for axisPointer. See `e_opts_axisPointer` for more info.
 #' @return A list of parameters for appropriate y-axis formatting for years on echarts figures
 #' @export
 
@@ -449,7 +451,7 @@ e_y_axis_formatting <- function(e,
                                 nameTextStyle = list(padding = c(0,0,0,0)),
                                 nameGap = 'auto',
                                 mo = NULL,
-                                axisPointer = e_opts_axisPointer(),
+                                axisPointer = NULL,
                                 ...) {
 
 
