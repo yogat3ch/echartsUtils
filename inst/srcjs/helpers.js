@@ -65,3 +65,16 @@ function waitForEl(selector) {
         });
     });
 }
+
+/**
+ * Returns unique values in an array
+ * @param {Array} array
+ * @returns {Array} of unique values
+ */
+function unique(array) {
+  function onlyUnique(value, index, array) {
+    return array.indexOf(value) === index;
+  }
+  var out = array.filter(onlyUnique);
+  return out;
+}
