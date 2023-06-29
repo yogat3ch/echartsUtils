@@ -237,6 +237,7 @@ e_opts_parallel <- function(e,
         bottom = bottom,
         left = left,
         layout = layout,
+        parallelAxisDefault = parallelAxisDefault,
         ...
       )
     )
