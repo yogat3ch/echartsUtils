@@ -74,11 +74,13 @@ e_opt_modify <- function(opt, new_opts, unnest_result = FALSE) {
 #' @param e \code{echart}
 #' @param opts \code{list} of options to replace/modify
 #' @param replace \code{lgl} whether to replace or modify (the default)
+#' @param ... \code{named arguments} named top level lists of options, will be compbined with `opts`
 #' @family options
 #' @return \code{list}
 #' @export
 
-e_opts_modify <- function(e, opts, replace = FALSE) {
+e_opts_modify <- function(e, opts, replace = FALSE, ...) {
+  opts <- append(opts, rlang::dots_list(...))
   if (replace) {
     .opts <- opts
   } else {
@@ -95,8 +97,8 @@ e_opts_modify <- function(e, opts, replace = FALSE) {
 #' @return \code{echarts}
 #' @export
 
-e_opts_update <- function(e, opts, replace = FALSE) {
-  .opts <- e_opts_modify(e, opts, replace)
+e_opts_update <- function(e, opts, replace = FALSE, ...) {
+  .opts <- e_opts_modify(e, opts, replace, ...)
   if (!e_has_timeline(e)) {
     e$x$opts <- .opts
   } else {
