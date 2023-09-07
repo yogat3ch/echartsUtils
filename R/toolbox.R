@@ -138,3 +138,21 @@ ec_toolbox <-
 
     e
   }
+
+
+#' Turn off inside datazoom
+#'
+#' @param e \code{echart}
+#'
+#' @return \code{echart}
+#' @export
+#'
+
+e_datazoom_off <- function(e) {
+  echarts4r::e_datazoom(
+    e,
+    type = "inside",
+    disabled = TRUE
+  )
+}
+

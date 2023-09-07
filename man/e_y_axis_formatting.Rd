@@ -14,7 +14,7 @@ e_y_axis_formatting(
   nameTextStyle = list(padding = c(0, 0, 0, 0)),
   nameGap = "auto",
   mo = NULL,
-  axisPointer = e_opts_axisPointer(),
+  axisPointer = NULL,
   ...
 )
 }
@@ -28,6 +28,8 @@ e_y_axis_formatting(
 \item{nameGap}{\code{num/chr} \strong{Default: 'auto'} uses custom heuristics to determine a best guess. See \link{axis_width}. Otherwise a numeric pixel value}
 
 \item{mo}{\code{int} of the magnitude of the units. 9 = Billions, 6 = Millions etc}
+
+\item{axisPointer}{Configuration for axisPointer. See \code{e_opts_axisPointer} for more info.}
 
 \item{...}{
   Arguments passed on to \code{\link[echarts4r:axis]{echarts4r::e_y_axis}}

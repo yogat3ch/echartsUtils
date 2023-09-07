@@ -4,7 +4,7 @@
 \alias{e_opts_modify}
 \title{Modify echarts options}
 \usage{
-e_opts_modify(e, opts, replace = FALSE)
+e_opts_modify(e, opts, replace = FALSE, ...)
 }
 \arguments{
 \item{e}{\code{echart}}
@@ -12,6 +12,8 @@ e_opts_modify(e, opts, replace = FALSE)
 \item{opts}{\code{list} of options to replace/modify}
 
 \item{replace}{\code{lgl} whether to replace or modify (the default)}
+
+\item{...}{\code{named arguments} named top level lists of options, will be compbined with \code{opts}}
 }
 \value{
 \code{list}
