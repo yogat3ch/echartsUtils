@@ -212,7 +212,7 @@ e_opts_init <- function(e, ...) {
 #' @param bottom \code{num} See \link{https://echarts.apache.org/en/option.html#parallel.bottom}{Docs}. **Default: 60**
 #' @param left \code{num} See \link{https://echarts.apache.org/en/option.html#parallel.left}{Docs}. **Default: 80**
 #' @param layout \code{chr} See \link{https://echarts.apache.org/en/option.html#parallel.layout}{Docs}. **Default: 'horizontal'**
-#' @param parallelAxisDefault See \link{https://echarts.apache.org/en/option.html#parallel.parallelAxisDefault}{Docs} for all available options. ** Default: axisLabel formatter set to `js_num2str` with default options **
+#' @param parallelAxisDefault See \link{https://echarts.apache.org/en/option.html#parallel.parallelAxisDefault}{Docs} for all available options. 
 #' @param ... See \link{https://echarts.apache.org/en/option.html#parallel}{Docs} for all available options
 #'
 #' @return \code{echart}

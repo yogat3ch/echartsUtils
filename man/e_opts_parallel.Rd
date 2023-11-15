@@ -28,7 +28,7 @@ e_opts_parallel(
 
 \item{layout}{\code{chr} See \link{https://echarts.apache.org/en/option.html#parallel.layout}{Docs}. \strong{Default: 'horizontal'}}
 
-\item{parallelAxisDefault}{See \link{https://echarts.apache.org/en/option.html#parallel.parallelAxisDefault}{Docs} for all available options. ** Default: axisLabel formatter set to \code{js_num2str} with default options **}
+\item{parallelAxisDefault}{See \link{https://echarts.apache.org/en/option.html#parallel.parallelAxisDefault}{Docs} for all available options.}
 
 \item{...}{See \link{https://echarts.apache.org/en/option.html#parallel}{Docs} for all available options}
 }

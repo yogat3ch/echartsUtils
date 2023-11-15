@@ -40,7 +40,7 @@ use_js_deps <- function() {
 #' @param add_commas \code{lgl} Format the numeric string output with commas every thousands place. **Default: FALSE**
 #' @details  The Javascript function is provided below for reference:
 #' ```{r echo=FALSE}
-#' glue::glue_collapse(readLines(system.file("src","js","num2str.js", package = "echartsUtils")), sep = '\n')
+#' glue::glue_collapse(readLines(system.file("srcjs","num2str.js", package = "echartsUtils")), sep = '\n')
 #' ```
 #' @return The JS callback function as a string with appropriate arguments
 #' @export
