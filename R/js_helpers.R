@@ -11,14 +11,14 @@ use_js_deps <- function() {
       name = c("axisPointer", "sigFig", "addCommas", "num2str", "helpers"),
       version = utils::packageVersion("echartsUtils"),
       src = c(href = js_src),
-      script = fs::path(name, ext = "js")
+      package = "echartUtils"
     )
 
   rlang::exec(
     htmltools::tagList,
     !!!purrr::pmap(deps, \(...) {
       .x <- list(...)
-      rlang::exec(htmltools::htmlDependency, !!!.x)
+      rlang::exec(htmltools::htmlDependency, !!!.x, script = list(src = fs::path(.x$name, ext = "js"), defer = NA))
     })
   )
 }
