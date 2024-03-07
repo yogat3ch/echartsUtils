@@ -9,13 +9,14 @@
 #' @param margin_right \code{chr} CSS compliant property
 #' @param display \code{chr} CSS compliant property
 #' @param as_chr \code{lgl} whether the output should be HTML/character
+#' @param tag \code{function} The function for the type of shiny.tag to use
 #' @param ... \code{chr} Additional CSS properties
 #' @return \code{shiny.tag}
 #' @export
 #'
 #' @examples
 #' e_tooltip_legend_dot("#48df94")
-e_tooltip_legend_dot <- function(background_color, color = "#000", border_radius = "10px", opacity = .2, height = "10px", width = "10px", margin_right = "4px", display = "inline-block", as_chr = FALSE, ...) {
+e_tooltip_legend_dot <- function(background_color, color = "#000", border_radius = "10px", opacity = .2, height = "10px", width = "10px", margin_right = "4px", display = "inline-block", as_chr = FALSE, tag = htmltools::tags$span, ...) {
   props <- rlang::dots_list(...)
   props <- append(props,
                   list(
@@ -28,7 +29,7 @@ e_tooltip_legend_dot <- function(background_color, color = "#000", border_radius
                     width = width,
                     `margin-right` = margin_right
                   ))
-  out <- htmltools::tags$span(
+  out <- tag(
     style = css_props(declarations = props, inline = TRUE)
   )
   if (as_chr)
@@ -45,7 +46,7 @@ e_tooltip_legend_dot <- function(background_color, color = "#000", border_radius
 #'
 #' @examples
 #' e_tooltip_legend_rectangle("#48df94")
-e_tooltip_legend_rectangle <- function(background_color, color = "#000", opacity = .2, height = "10px", width = "20px", display = "inline-block", as_chr = FALSE, ...) {
+e_tooltip_legend_rectangle <- function(background_color, color = "#000", opacity = .2, height = "10px", width = "20px", display = "inline-block", as_chr = FALSE, tag = htmltools::tags$span, ...) {
 
   props <- rlang::dots_list(...)
   props <- append(props,
@@ -57,7 +58,7 @@ e_tooltip_legend_rectangle <- function(background_color, color = "#000", opacity
            height = height,
            width = width
          ))
-  out <- htmltools::tags$span(
+  out <- tag(
     style = css_props(declarations = props, inline = TRUE)
   )
   if (as_chr)
